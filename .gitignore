@@ -1,0 +1,42 @@
+# Credenciais e ambiente
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env/
+.ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.expo/
+*.tgz
+
+# Bancos locais e dumps
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Sistema / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs e arquivos temporarios
+*.log
+tmp/
+temp/
