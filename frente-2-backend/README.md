@@ -1,68 +1,138 @@
-# Frente 2 — Backend Flask + API do Watson
+# Frente 2 — Backend Flask + API do Watson Assistant
 
-**Disciplina de referência:** PCV e integração de APIs  
+**Disciplina de referência:** PCV (Processamento de Linguagem Natural, Chatbots & Virtual Agents), Cap. 10  
 **Peso na nota base:** 2 pontos (integração backend e assistente) + parte da organização do código
 
-## Objetivo
+## O que este backend faz
 
-Subir uma API simples em Flask que recebe a mensagem do usuário, envia ao Watson Assistant e devolve a resposta para a interface.
-
-## O que fazer
-
-1. Criar a aplicação Flask com um endpoint de conversa (exemplo: `POST /api/chat`).
-2. Integrar a API do IBM Watson Assistant com a skill exportada pela Frente 1.
-3. Manter sessão/contexto do diálogo entre as mensagens do mesmo usuário.
-4. Expor um `GET /api/health` para a Frente 3 e o vídeo validarem que o backend está no ar.
-5. Usar apenas `.env` para apikey, URL e skill ID. Nada de credencial no Git.
-6. Documentar no README desta pasta como instalar e subir o servidor.
-
-## Contrato da API (sugestão)
+Recebe a mensagem do paciente pela interface (Frente 3), envia ao IBM watsonx Assistant (Frente 1) pela API v2
+e devolve a resposta interpretada: texto, intenção reconhecida, confiança, entidades e o `session_id` para
+manter o contexto da conversa.
 
 ```text
-POST /api/chat
-{
-  "session_id": "opcional-na-primeira-chamada",
-  "message": "Estou com falta de ar"
-}
-
-200
-{
-  "session_id": "abc123",
-  "intent": "sintomas",
-  "reply": "Texto devolvido pelo Watson"
-}
+interface (Frente 3) --POST /api/chat--> app.py --SDK ibm-watson--> watsonx Assistant (Frente 1)
 ```
 
-A Frente 3 depende desse contrato. Se mudar o JSON, avise quem estiver na interface.
+A implementação segue o exemplo Flask + Watson do material (Cap. 10, Código-fonte 10): `IAMAuthenticator`,
+`AssistantV2`, `set_service_url`, `create_session` e `message`, com credenciais lidas de variáveis de ambiente
+`WA_API_KEY`, `WA_URL` e `WA_ASSISTANT_ID`.
 
-## Organização sugerida
+## Estrutura
 
 ```text
 frente-2-backend/
-|-- README.md
-|-- .env.example
+|-- app.py                 # Flask: GET /, GET /api/health, POST /api/chat
+|-- watson_client.py       # cliente do Watson (sessão, mensagem, parse da resposta)
+|-- templates/index.html   # página de teste do backend (a interface oficial é da Frente 3)
+|-- scripts/smoke_chat.py  # conversa real pelo terminal com as credenciais do .env
+|-- tests/                 # pytest sem rede (SDK e cliente substituídos por dublês)
 |-- requirements.txt
-|-- app.py
-`-- watson_client.py
+|-- pytest.ini
+`-- .env.example
 ```
+
+## Como rodar
+
+Requisitos: Python 3.10 a 3.12 (o SDK `ibm-watson` é testado até o 3.11; validamos com 3.12) e uma instância
+do watsonx Assistant no IBM Cloud (ver "Como obter as credenciais").
+
+```bash
+cd frente-2-backend
+python3.12 -m venv .venv            # ou: uv venv --python 3.12 .venv
+source .venv/bin/activate           # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env                # preencher WA_API_KEY, WA_URL, WA_ASSISTANT_ID (e WA_ENVIRONMENT_ID, se houver)
+python app.py                       # http://127.0.0.1:5050
+```
+
+Testes (não precisam de credenciais nem de internet):
+
+```bash
+pytest -q
+```
+
+Conversa real pelo terminal, para validar a integração antes de ligar a interface:
+
+```bash
+python scripts/smoke_chat.py "Olá" "Estou com dor no peito" "qual o placar do jogo"
+```
+
+## Contrato da API
+
+`GET /api/health`
+
+```json
+{"status": "ok", "service": "cardioia-backend", "watson_configured": true}
+```
+
+`POST /api/chat`
+
+```json
+{"message": "Estou com falta de ar", "session_id": null}
+```
+
+`session_id` é opcional na primeira chamada. Reenvie o valor devolvido nas chamadas seguintes para manter o
+contexto. Se a sessão expirar por inatividade no Watson, o backend cria outra e devolve o novo `session_id`.
+
+Resposta `200`:
+
+```json
+{
+  "response": "Entendi que você está com falta de ar. Há quanto tempo isso acontece?",
+  "reply": "Entendi que você está com falta de ar. Há quanto tempo isso acontece?",
+  "session_id": "5f3c...",
+  "intent": "sintomas",
+  "confidence": 0.93,
+  "entities": [{"entity": "sintoma", "value": "falta de ar", "confidence": 1.0}]
+}
+```
+
+`response` mantém o contrato do material da disciplina; `reply`, `intent` e `session_id` atendem o contrato
+combinado com a Frente 3.
+
+Erros: `400` mensagem vazia, `503` credenciais ausentes no `.env`, `502` falha na API do Watson (o campo
+`detail` traz a mensagem devolvida pela IBM).
+
+## Variáveis de ambiente
+
+| Variável | Obrigatória | Onde encontrar |
+|---|---|---|
+| `WA_API_KEY` | sim | IBM Cloud → instância do watsonx Assistant → Service credentials → `apikey` |
+| `WA_URL` | sim | idem, campo `url` (ex.: `https://api.us-south.assistant.watson.cloud.ibm.com`) |
+| `WA_ASSISTANT_ID` | sim | watsonx Assistant → Assistant settings → "Assistant IDs and API details" → View details |
+| `WA_ENVIRONMENT_ID` | não | mesma tela, "Draft environment ID" ou "Live environment ID" |
+| `WA_VERSION` | não | data da versão da API v2; padrão `2021-06-14`, como no material |
+| `FLASK_PORT` | não | padrão `5050` |
+
+Sobre `WA_ENVIRONMENT_ID`: o SDK `ibm-watson` 11.x passou a exigir o environment ID nas rotas de sessão. Se a
+variável estiver preenchida, o backend usa os métodos do SDK. Se estiver vazia, usa a rota antiga
+`/v2/assistants/{assistant_id}/sessions`, que é a mesma do código do material (só `assistant_id`).
+
+## Como obter as credenciais (Etapa 0)
+
+1. **Conta IBM Cloud.** Sem cartão: gerar um Feature Code acadêmico no IBM SkillsBuild Software Downloads
+   (`ibm.com/academic`, com o e-mail FIAP: Topics → IBM Cloud → Software → IBM Cloud Feature Code → Request) e
+   cadastrar em `cloud.ibm.com/registration` com "Register with a Code". Com cartão: conta Pay-As-You-Go comum,
+   que continua gratuita nos serviços de plano Lite. Guia em português: `linktr.ee/sb4collegeptbr`.
+2. **Instância.** Catálogo → "watsonx Assistant" → região Dallas (us-south) → plano **Lite** → Create.
+   O plano Trial de 30 dias citado no material não está mais no catálogo.
+3. **Credenciais.** Na página do serviço, "Service credentials" → `apikey` e `url`.
+4. **Experiência clássica.** "Launch watsonx Assistant" → menu da conta (canto superior direito) →
+   "Switch to classic experience", como no Cap. 10.
+5. **Skill e assistant.** Skills → Create skill → Dialog skill → Brazilian Portuguese. Assistants → Create
+   assistant → adicionar a skill. Assistant settings → "Assistant IDs and API details" → copiar os IDs.
+6. Preencher o `.env` (o arquivo está no `.gitignore`).
 
 ## Contrato com as outras frentes
 
-- Frente 1 entrega o assistente publicado e o JSON.
-- Frente 3 consome `/api/chat` e `/api/health`.
-- Frente 4 pode ganhar depois um endpoint opcional de extração (`POST /api/extract`), sem bloquear a nota base.
-- Frente 5 não precisa deste Flask para o robô RPA, mas pode reutilizar o mesmo paciente simulado.
+- **Frente 1** entrega a skill publicada no assistant apontado por `WA_ASSISTANT_ID`.
+- **Frente 3** consome `POST /api/chat` e `GET /api/health`. Pode substituir `templates/index.html` pela
+  interface final ou rodar em outra origem (nesse caso, combinar CORS com quem cuida do backend).
+- **Frente 5** pode gravar `intent` e `session_id` de cada turno no banco não relacional.
 
-## Entregáveis
+## Limitações conhecidas
 
-- Código Python do backend.
-- `requirements.txt` e `.env.example`.
-- Instruções de execução nesta pasta.
-
-## Fora desta frente
-
-Modelagem de intents no Watson, HTML/React Native e os dois Ir Além.
-
-## Observação de segurança
-
-Credenciais do Watson ficam só no `.env` local. O `.gitignore` da raiz já bloqueia esse arquivo.
+- A documentação da IBM lista a API v2 como recurso do plano Plus. Confirmado em 13/09/2026: `create_session` e
+  `message` funcionam no Lite; `list_assistants` responde "API is not supported on lite plan".
+- Sem CORS por padrão, alinhado ao exemplo do material (front servido pelo próprio Flask).
+- Simulação acadêmica: o assistente não substitui avaliação médica.
