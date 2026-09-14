@@ -15,7 +15,7 @@
 | Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | a escolher |
 | Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | 2. Backend Flask |
 | Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | a escolher |
-| Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | a escolher |
+| Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | 1. Watson Assistant |
 | Paulo Henrique Senise | [@PauloSenise](https://github.com/PauloSenise) | a escolher |
 
 ## Descrição

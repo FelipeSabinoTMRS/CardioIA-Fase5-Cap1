@@ -1,59 +1,87 @@
 # Frente 1 — Watson Assistant (fluxo conversacional)
 
-**Disciplina de referência:** PCV — Chatbots e Virtual Agents  
+**Disciplina de referência:** PCV — Chatbots e Virtual Agents (Fase 5, Cap. 10, seção 1.6)  
 **Peso na nota base:** 3 pontos (implementação do fluxo conversacional) + parte da documentação
 
 ## Objetivo
 
-Modelar o Assistente Cardiológico Inteligente no IBM Watson Assistant, com atendimento inicial em saúde por linguagem natural.
+Modelar o Assistente Cardiológico Inteligente no IBM Watson Assistant (experiência clássica, Dialog skill), com
+atendimento inicial em saúde por linguagem natural.
 
-O assistente ajuda o paciente a entender informações de saúde. Ele não fecha diagnóstico, não substitui médico e não inventa conduta clínica.
+O assistente ajuda o paciente a entender informações de saúde. Ele não fecha diagnóstico, não substitui médico e
+não inventa conduta clínica. Dor no peito, falta de ar intensa, desmaio e sinais de AVC levam sempre à orientação
+de ligar 192.
 
-## O que fazer
+## Estrutura
 
-1. Criar o assistente na plataforma IBM Watson Assistant, no padrão das aulas.
-2. Definir intents, entities e dialog nodes de um fluxo de triagem inicial.
-3. Escrever respostas contextualizadas e um fallback para quando a intenção não for reconhecida.
-4. Tratar urgência: dor no peito, falta de ar intensa ou desmaio devem direcionar para emergência.
-5. Exportar a configuração do assistente (JSON) e versionar nesta pasta.
-6. Escrever o relatório curto do fluxo (1 a 2 páginas) em `docs/relatorio_fluxo_conversacional.md`.
+```text
+frente-1-watson/
+|-- cardioia-skill.json        # skill para importar no Watson (formato de exportação da Dialog skill)
+`-- scripts/
+    |-- gerar_skill.py         # modelagem da skill em Python -> gera o JSON
+    |-- validar_skill.py       # checagem offline da árvore (IDs, jumps, intents, entities, variáveis)
+    `-- testar_fluxo.py        # conversas-roteiro contra a skill publicada, via cliente da Frente 2
+```
 
-## Intents sugeridas
+O relatório do fluxo está em [`docs/relatorio_fluxo_conversacional.md`](../docs/relatorio_fluxo_conversacional.md).
 
-| Intent | Exemplo de fala do paciente |
-|---|---|
-| `saudacao` | Oi, boa tarde |
-| `sintomas` | Estou com falta de ar e cansaço |
-| `sinais_vitais` | Minha pressão deu 15 por 9 |
-| `medicamentos` | Posso tomar o remédio da pressão agora? |
-| `exame` | O que significa o laudo do meu exame? |
-| `agendamento` | Quero marcar retorno com o cardiologista |
-| `emergencia` | Estou com dor forte no peito |
-| `despedida` | Obrigado, era só isso |
-| `fora_de_escopo` | Qual o placar do jogo? |
+## O que a skill tem
 
-Ajuste nomes e exemplos ao material da disciplina. Inclua utterances de treino suficientes para o classificador.
+Só recursos apresentados no material: intents, entities (sinônimos, pattern regex e de sistema), nós e nós filhos,
+operadores de entidade, jump to, variáveis de contexto (inclusive `.literal`), variações de resposta e `anything_else`.
 
-## Entities sugeridas
+| Intent | Exemplo | O que o diálogo faz |
+|---|---|---|
+| `#saudacao` | Oi, boa tarde | Apresenta o assistente e o menu |
+| `#sintomas` | Estou com tontura | Triagem: sintoma → desde quando → intensidade → resumo |
+| `#sinais_vitais` | Minha pressão deu 15 por 9 | Classifica pressão, frequência cardíaca ou saturação |
+| `#medicamentos` | Esqueci de tomar a losartana | Orientação geral, sem dose; cita o remédio reconhecido |
+| `#exames` | O que é um ecocardiograma? | Explica o exame citado; não interpreta laudo |
+| `#agendamento` | Quero marcar com o cardiologista | Agendamento simulado: especialidade → data → turno → resumo |
+| `#prevencao` | Como cuidar do coração? | Dicas gerais de hábitos |
+| `#emergencia` | Estou com dor forte no peito | Orienta 192 (prioridade sobre todos os nós) |
+| `#ajuda` | O que você faz? | Menu com exemplos |
+| `#cancelar` | Deixa pra lá | Sai de qualquer fluxo em andamento |
+| `#despedida` | Obrigado, era só isso | Encerra com lembrete de segurança |
+| `#fora_de_escopo` | Qual o placar do jogo? | Explica o escopo |
 
-- sintoma (`dor no peito`, `falta de ar`, `palpitação`, `tontura`, `inchaço`)
-- sinal_vital (`pressão`, `frequência cardíaca`, `saturação`)
-- medicamento (`losartana`, `atenolol`, `aas` — lista simulada)
-- periodo (`hoje`, `ontem`, `de manhã`)
+Entities: `@sinal_alerta`, `@sintoma`, `@sinal_vital`, `@medicamento`, `@exame`, `@periodo`, `@intensidade`,
+`@especialidade`, `@turno`, `@pressao_medida` (regex `15 por 9`), `@sys-number`, `@sys-date`.
+
+## Como importar no Watson
+
+1. IBM Cloud → instância `cardioia-assistant` → Launch watsonx Assistant → experiência clássica.
+2. Skills → Create skill → Dialog skill → aba **Upload skill** → selecionar `cardioia-skill.json`.
+3. Assistants → `cardioia-classic` → trocar a skill placeholder pela `cardioia-skill` (o Assistant ID não muda,
+   então o backend da Frente 2 continua funcionando sem alterar o `.env`).
+4. Aguardar o treinamento terminar e testar no **Try it**.
+5. Se ajustar algo pela interface, exporte de novo (Skills → ⋮ → Download) e substitua o JSON desta pasta.
+
+## Como regenerar e testar
+
+```bash
+cd frente-1-watson
+python scripts/gerar_skill.py      # recria cardioia-skill.json
+python scripts/validar_skill.py    # checagem offline, sem credencial
+```
+
+Com a skill publicada e o `.env` da Frente 2 preenchido:
+
+```bash
+python scripts/testar_fluxo.py     # 10 roteiros: emergência, triagem, sinais vitais, agendamento, exceções...
+```
 
 ## Contrato com as outras frentes
 
-- A Frente 2 consome este assistente pela API. Entregue skill ID, URL e o JSON exportado.
-- A Frente 3 só mostra o que o Watson responder. O tom das mensagens se resolve aqui.
-- A Frente 4 pode reutilizar entidades clínicas no JSON extraído por IA generativa.
-- A Frente 5 pode registrar no log a intent detectada em cada turno.
+- **Frente 2** consome o assistente pelo mesmo `WA_ASSISTANT_ID`. As respostas usam só `response_type: text`.
+- **Frente 3** mostra o texto devolvido. O tom das mensagens se resolve aqui.
+- **Frente 4** pode reaproveitar `@sintoma`, `@medicamento` e `@sinal_alerta` como vocabulário da extração.
+- **Frente 5** pode gravar a intent de cada turno; `$alerta_emergencia` marca turnos que pediram 192.
 
 ## Entregáveis
 
-- Arquivo de exportação do assistente (JSON) nesta pasta.
-- Relatório curto do fluxo em `docs/relatorio_fluxo_conversacional.md`.
-- Prints do builder (intents, entities e um caminho de diálogo) em `assets/evidencias/`.
-
-## Fora desta frente
-
-Implementação Flask, tela de chat, notebook de IA generativa e robô RPA.
+- [x] Modelagem da skill (`scripts/gerar_skill.py`) e JSON importável (`cardioia-skill.json`)
+- [x] Relatório curto do fluxo em `docs/relatorio_fluxo_conversacional.md`
+- [x] Testado no Watson como `cardioia-skill-teste` (14/09/2026): 10 roteiros, 31 turnos, todos corretos
+- [ ] Substituir a `cardioia-skill` oficial pela versão testada
+- [ ] Prints do builder (intents, entities e um caminho de diálogo) em `assets/evidencias/`
