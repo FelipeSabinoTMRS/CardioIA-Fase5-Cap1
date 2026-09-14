@@ -13,7 +13,7 @@
 | Integrante | GitHub | Frente |
 |---|---|---|
 | Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | a escolher |
-| Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | a escolher |
+| Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | 2. Backend Flask |
 | Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | a escolher |
 | Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | a escolher |
 | Paulo Henrique Senise | [@PauloSenise](https://github.com/PauloSenise) | a escolher |
@@ -114,7 +114,7 @@ As Frentes 1, 2 e 3 fecham a nota base. As Frentes 4 e 5 são os Ir Além e entr
 
 - [ ] Assistente modelado no Watson Assistant (intents, entities, dialog nodes)
 - [ ] Fluxo com respostas contextualizadas e tratamento de exceção
-- [ ] Backend Flask integrado à API do Watson
+- [x] Backend Flask integrado à API do Watson
 - [ ] Interface funcional (HTML ou React Native)
 - [ ] Repositório GitHub organizado (tornar público na hora da entrega)
 - [ ] Vídeo de até 3 minutos
