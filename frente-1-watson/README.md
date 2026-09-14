@@ -50,10 +50,13 @@ Entities: `@sinal_alerta`, `@sintoma`, `@sinal_vital`, `@medicamento`, `@exame`,
 
 ## Como importar no Watson
 
-1. IBM Cloud → instância `cardioia-assistant` → Launch watsonx Assistant → experiência clássica.
+A skill já está publicada na `cardioia-skill` da instância `cardioia-assistant` (a mesma do backend). Para montar em
+outra conta, por exemplo para estudar ou tirar prints:
+
+1. IBM Cloud → instância do watsonx Assistant (plano Lite) → Launch watsonx Assistant → experiência clássica.
 2. Skills → Create skill → Dialog skill → aba **Upload skill** → selecionar `cardioia-skill.json`.
-3. Assistants → `cardioia-classic` → trocar a skill placeholder pela `cardioia-skill` (o Assistant ID não muda,
-   então o backend da Frente 2 continua funcionando sem alterar o `.env`).
+3. Assistants → Create assistant → Add dialog skill. Para trocar a skill de um assistant existente:
+   bloco Dialog → ⋮ → **Swap skill** (o Assistant ID não muda, então o `.env` do backend continua valendo).
 4. Aguardar o treinamento terminar e testar no **Try it**.
 5. Se ajustar algo pela interface, exporte de novo (Skills → ⋮ → Download) e substitua o JSON desta pasta.
 
@@ -68,7 +71,7 @@ python scripts/validar_skill.py    # checagem offline, sem credencial
 Com a skill publicada e o `.env` da Frente 2 preenchido:
 
 ```bash
-python scripts/testar_fluxo.py     # 10 roteiros: emergência, triagem, sinais vitais, agendamento, exceções...
+python scripts/testar_fluxo.py     # 10 roteiros (28 turnos): emergência, triagem, sinais vitais, agendamento...
 ```
 
 ## Contrato com as outras frentes
@@ -82,6 +85,5 @@ python scripts/testar_fluxo.py     # 10 roteiros: emergência, triagem, sinais v
 
 - [x] Modelagem da skill (`scripts/gerar_skill.py`) e JSON importável (`cardioia-skill.json`)
 - [x] Relatório curto do fluxo em `docs/relatorio_fluxo_conversacional.md`
-- [x] Testado no Watson como `cardioia-skill-teste` (14/09/2026): 10 roteiros, 31 turnos, todos corretos
-- [ ] Substituir a `cardioia-skill` oficial pela versão testada
+- [x] Publicado na `cardioia-skill` oficial e testado (14/09/2026): 10 roteiros, 28 turnos, todos corretos
 - [ ] Prints do builder (intents, entities e um caminho de diálogo) em `assets/evidencias/`

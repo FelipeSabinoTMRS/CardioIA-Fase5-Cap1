@@ -99,8 +99,9 @@ A skill é publicada no mesmo assistant consumido pela Frente 2. As respostas us
 sinais vitais, agendamento, cancelamento e exceções).
 
 Verificação em 14/09/2026: a skill foi importada pela API como `cardioia-skill-teste` na instância do grupo (plano
-Lite). A primeira rodada teve 24 de 31 turnos corretos; depois da reordenação descrita na seção 3, os **31 turnos
-passaram**.
+Lite). A primeira rodada teve 21 de 28 turnos corretos; depois da reordenação descrita na seção 3, os **28 turnos
+passaram**. Em seguida a `cardioia-skill` oficial (mesmo ID, ligada ao assistant do backend) foi atualizada com o
+mesmo JSON e os roteiros passaram de novo (28/28).
 
 ## 7. Limitações
 

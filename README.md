@@ -112,13 +112,13 @@ As Frentes 1, 2 e 3 fecham a nota base. As Frentes 4 e 5 são os Ir Além e entr
 
 ## Checklist do enunciado
 
-- [ ] Assistente modelado no Watson Assistant (intents, entities, dialog nodes)
-- [ ] Fluxo com respostas contextualizadas e tratamento de exceção
+- [x] Assistente modelado no Watson Assistant (intents, entities, dialog nodes)
+- [x] Fluxo com respostas contextualizadas e tratamento de exceção
 - [x] Backend Flask integrado à API do Watson
 - [ ] Interface funcional (HTML ou React Native)
 - [ ] Repositório GitHub organizado (tornar público na hora da entrega)
 - [ ] Vídeo de até 3 minutos
-- [ ] Relatório curto do fluxo conversacional
+- [x] Relatório curto do fluxo conversacional
 - [ ] Ir Além 1: extração clínica com IA generativa + PDF
 - [ ] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
 
