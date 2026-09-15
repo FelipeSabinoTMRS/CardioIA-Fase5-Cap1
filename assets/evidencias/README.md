@@ -24,3 +24,12 @@ Arquivos desta pasta entram no README principal e nos relatórios de cada frente
 | `08-interface-chat.png` | Tela inicial com aviso acadêmico e status conectado |
 | `09-interface-triagem.png` | Triagem de palpitação até o resumo |
 | `10-interface-emergencia.png` | Resposta de emergência / 192 |
+
+## Frente 5 — Robô RPA (rodada determinística de 15/09/2026)
+
+Gerados por `python resumo_execucoes.py --graficos saida` depois de `preparar_ambiente.py --reset` e `robot.py --ciclos 1`.
+
+| Arquivo | O que mostra |
+|---|---|
+| `11-frente5-dispersao-anomalias.png` | As 480 leituras analisadas; em vermelho as 12 que o Isolation Forest marcou, com as linhas dos limiares das regras |
+| `12-frente5-alertas-por-tipo.png` | Os 13 alertas do ciclo por tipo e por origem (regra, regra+ia, ia, texto) |

@@ -1,0 +1,192 @@
+{
+  "banco": "cardioia_rpa",
+  "sgbd": "MongoDB 6 (imagem oficial mongo:6, docker-compose.yml)",
+  "observacao": "Estrutura das coleções do robô. Os exemplos vêm de uma execução real com dados simulados, menos o documento com _ilustrativo, escrito à mão para mostrar o formato de um ciclo com erro. ObjectId e datas aparecem como texto. O teste tests/test_banco_nosql.py confere se coleções e índices deste arquivo batem com o código.",
+  "ligacao_com_o_sqlite": "O campo execucao_id liga as três coleções às tabelas analises_leitura e alertas. O alerta_id e o leitura_id dos eventos apontam para linhas do SQLite; o mensagem_id das tabelas aponta para mensagens_pacientes.",
+  "colecoes": {
+    "execucoes": {
+      "finalidade": "Um documento por ciclo do robô: status, parâmetros e limiares usados, versões do ambiente, métricas e metadados do modelo treinado.",
+      "chave": "_id = execucao_id (UUID)",
+      "status_possiveis": ["em_execucao", "concluida", "erro", "interrompida"],
+      "indices": [
+        [["inicio", -1]],
+        [["status", 1]]
+      ],
+      "exemplos": [
+        {
+          "_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "status": "concluida",
+          "inicio": "2026-09-15T22:51:31+00:00",
+          "fim": "2026-09-15T22:51:31.233+00:00",
+          "duracao_s": 0.233,
+          "robo": "robo-monitoramento-cardioia",
+          "versao_robo": "1.0.0",
+          "parametros": {
+            "lote_leituras": 500,
+            "lote_mensagens": 100,
+            "janela_treino_dias": 30,
+            "janela_alerta_estado_horas": 24,
+            "tipos_estado": ["pressao_elevada", "baixa_adesao"],
+            "versao_regras": "1.0.0",
+            "limiares": {
+              "crise_sistolica": 180, "crise_diastolica": 120,
+              "elevada_sistolica": 140, "elevada_diastolica": 90,
+              "baixa_sistolica": 90, "baixa_diastolica": 60,
+              "fc_alta": 100, "fc_muito_alta": 130, "fc_baixa": 50,
+              "adesao_minima": 0.8
+            },
+            "modelo": {
+              "algoritmo": "IsolationForest",
+              "features": ["pressao_sistolica", "pressao_diastolica", "frequencia_cardiaca", "pressao_pulso",
+                           "adesao_7d", "desvio_sistolica", "desvio_diastolica", "desvio_fc"],
+              "contaminacao": 0.025,
+              "n_estimadores": 200,
+              "semente": 42,
+              "minimo_amostras": 50
+            },
+            "vocabulario": {
+              "fonte": "frente-1-watson/cardioia-skill.json",
+              "hash_skill": "599754010c71",
+              "entidades": ["sinal_alerta", "sintoma", "medicamento"]
+            }
+          },
+          "ambiente": {"python": "3.12.10", "sqlite": "3.49.1", "pandas": "3.0.5", "scikit_learn": "1.9.1", "pymongo": "4.18.1"},
+          "metricas": {
+            "leituras_analisadas": 480,
+            "anomalias_ia": 12,
+            "modelo_treinado": true,
+            "mensagens_processadas": 6,
+            "mensagens_rejeitadas": 1,
+            "alertas_gerados": 13,
+            "alertas_por_tipo": {
+              "taquicardia": 2, "bradicardia": 1, "pressao_baixa": 1, "crise_hipertensiva": 1, "padrao_atipico": 2,
+              "pressao_elevada": 2, "baixa_adesao": 1, "sintoma_relatado": 2, "sinal_alerta_relatado": 1
+            }
+          },
+          "modelo": {
+            "algoritmo": "IsolationForest",
+            "features": ["pressao_sistolica", "pressao_diastolica", "frequencia_cardiaca", "pressao_pulso",
+                         "adesao_7d", "desvio_sistolica", "desvio_diastolica", "desvio_fc"],
+            "contaminacao": 0.025,
+            "n_estimadores": 200,
+            "semente": 42,
+            "minimo_amostras": 50,
+            "n_amostras": 480,
+            "versao_scikit_learn": "1.9.1",
+            "hash_dataset": "f234a0350feec298d911a9ae82f599e1ef8b1dd14abc9c4a400632fa2bf5e7d7"
+          }
+        },
+        {
+          "_ilustrativo": "formato gravado por falhar_execucao quando uma exceção interrompe o ciclo",
+          "_id": "exemplo-de-ciclo-com-falha",
+          "status": "erro",
+          "inicio": "2026-09-15T23:00:00+00:00",
+          "fim": "2026-09-15T23:00:00.041+00:00",
+          "duracao_s": 0.041,
+          "erro": {"tipo": "OperationalError", "mensagem": "database is locked"}
+        }
+      ]
+    },
+    "eventos": {
+      "finalidade": "Log de cada ação do robô. O conteúdo de detalhes muda conforme o tipo, por isso a coleção não tem esquema fixo.",
+      "tipos": {
+        "leituras_lidas": "quantas leituras pendentes o ciclo pegou e o intervalo de ids",
+        "modelo_treinado": "parâmetros, número de amostras, versão do scikit-learn e hash SHA-256 dos dados de treino",
+        "modelo_nao_treinado": "mesmo conteúdo, com o motivo (histórico insuficiente)",
+        "alerta_gerado": "um evento por alerta gravado no SQLite, com alerta_id, leitura_id ou mensagem_id e score",
+        "mensagem_interpretada": "entidades encontradas na mensagem (sem copiar o texto) e o alerta gerado, se houver",
+        "mensagem_rejeitada": "mensagem de paciente que não existe no cadastro relacional",
+        "erro": "tipo e mensagem da exceção que interrompeu o ciclo"
+      },
+      "indices": [
+        [["execucao_id", 1], ["registrado_em", 1]],
+        [["tipo", 1]]
+      ],
+      "exemplos": [
+        {
+          "_id": "6aa9cbf30600272524a6f988",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "tipo": "leituras_lidas",
+          "registrado_em": "2026-09-15T22:51:31+00:00",
+          "detalhes": {"quantidade": 480, "primeira_leitura_id": 1, "ultima_leitura_id": 480}
+        },
+        {
+          "_id": "6aa9cbf30600272524a6f98b",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "tipo": "alerta_gerado",
+          "registrado_em": "2026-09-15T22:51:31+00:00",
+          "detalhes": {
+            "alerta_id": 1,
+            "tipo_alerta": "taquicardia",
+            "severidade": "moderada",
+            "origem_deteccao": "regra+ia",
+            "paciente_codigo": "PAC-003",
+            "leitura_id": 144,
+            "mensagem_id": null,
+            "score_anomalia": -0.054
+          }
+        },
+        {
+          "_id": "6aa9cbf30600272524a6f998",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "tipo": "mensagem_interpretada",
+          "registrado_em": "2026-09-15T22:51:31+00:00",
+          "detalhes": {
+            "mensagem_id": "6aa9cbf175eec1457b5cd21e",
+            "paciente_codigo": "PAC-001",
+            "sinais_alerta": [],
+            "sintomas": [],
+            "medicamentos": [],
+            "negados": ["dor no peito", "falta de ar"],
+            "alerta_id": null
+          }
+        },
+        {
+          "_id": "6aa9cbf30600272524a6f98a",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "tipo": "mensagem_rejeitada",
+          "registrado_em": "2026-09-15T22:51:31+00:00",
+          "detalhes": {"mensagem_id": "6aa9cbf175eec1457b5cd221", "motivo": "paciente PAC-099 fora do cadastro relacional"}
+        }
+      ]
+    },
+    "mensagens_pacientes": {
+      "finalidade": "Mensagens textuais enviadas pelos pacientes e o resultado da interpretação feita pelo robô.",
+      "status_possiveis": ["pendente", "processada", "rejeitada"],
+      "campos_opcionais_vindos_do_chat": {
+        "session_id": "sessão do Watson devolvida por POST /api/chat (Frente 2)",
+        "intent": "intenção reconhecida pelo Watson no turno (Frente 1)"
+      },
+      "indices": [
+        [["status", 1], ["recebida_em", 1]]
+      ],
+      "exemplos": [
+        {
+          "_id": "6aa9cbf175eec1457b5cd21b",
+          "status": "processada",
+          "paciente_codigo": "PAC-004",
+          "texto": "Ontem à noite senti um aperto no peito e fiquei suando frio.",
+          "recebida_em": "2026-09-15T19:51:28+00:00",
+          "canal": "app_monitoramento",
+          "origem": "simulador",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "processada_em": "2026-09-15T22:51:31+00:00",
+          "interpretacao": {"sinais_alerta": ["dor no peito"], "sintomas": [], "medicamentos": [], "negados": []},
+          "alerta_id": 13
+        },
+        {
+          "_id": "6aa9cbf175eec1457b5cd221",
+          "status": "rejeitada",
+          "paciente_codigo": "PAC-099",
+          "texto": "Oi, recebi o aparelho de pressão, como começo?",
+          "recebida_em": "2026-09-15T21:51:28+00:00",
+          "canal": "app_monitoramento",
+          "origem": "simulador",
+          "execucao_id": "6f247cd9-2eb0-4c6b-8dfa-9bb52131f9af",
+          "processada_em": "2026-09-15T22:51:31+00:00",
+          "motivo": "paciente PAC-099 fora do cadastro relacional"
+        }
+      ]
+    }
+  }
+}

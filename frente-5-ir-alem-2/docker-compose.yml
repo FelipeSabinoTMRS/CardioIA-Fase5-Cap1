@@ -1,0 +1,20 @@
+# MongoDB da Frente 5, no formato do Cap. 2 de AIRPA (seção 7.8).
+# Diferenças do exemplo do material:
+# - porta publicada só em 127.0.0.1, para o banco não ficar exposto na rede;
+# - volume nomeado em vez de pasta local, que evita erro de permissão do MongoDB no Windows;
+# - usuário e senha podem vir do .env (MONGO_USUARIO / MONGO_SENHA).
+services:
+  mongodb:
+    image: mongo:6
+    container_name: cardioia_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USUARIO:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_SENHA:-admin}
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - dados_mongo:/data/db
+
+volumes:
+  dados_mongo:
