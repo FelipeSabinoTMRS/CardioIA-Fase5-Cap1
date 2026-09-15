@@ -1,63 +1,98 @@
-# Frente 4 — Ir Além 1: IA generativa e extração clínica
+﻿# Frente 4 - Ir Alémm 1: IA generativa e extração clí­nica
 
-**Disciplina de referência:** IA Generativa e prompting  
+Esta frente demonstra como transformar um texto clí­nico fictcio e não estruturado em um JSON padronizado usando IA generativa. O modelo recebe instruções explicativas para não completar, inferir ou inventar informações ausentes.
 
-## Objetivo
+> Projeto exclusivamente acadêmico. A saída não constitui diagnostico, orientação médica ou atendimento de emergência.
 
-Expandir o assistente para interpretar conteúdo clínico não estruturado com modelos de linguagem, no padrão das aulas, e devolver a informação em formato estruturado (JSON).
+## O que foi implementado
 
-## O que fazer
+- leitura de texto digitado ou de arquivo `.txt`;
+- extração com a API Gemini;
+- resposta estruturada por schema Pydantic;
+- campos ausentes representados por listas vazias ou `null`;
+- separação de informações afirmadas e negadas;
+- validações automáticas antes de salvar o JSON;
+- exemplos clí­nicos totalmente fict­cios.
 
-1. Usar técnicas de prompting e IA generativa apresentadas em aula.
-2. Receber um texto clínico simulado (prontuário curto, mensagem do paciente ou laudo fictício). Opcionalmente, uma imagem simulada se o material da disciplina cobrir isso.
-3. Extrair campos relevantes: sintomas, fatores de risco, medicamentos, sinais vitais mencionados e sinais de alerta.
-4. Validar a saída em JSON. O modelo não inventa dado que não está no texto.
-5. Explicar o fluxo em PDF.
-
-## Exemplo de saída
-
-```json
-{
-  "sintomas": ["falta de ar", "cansaço"],
-  "fatores_risco": ["hipertensao", "tabagismo"],
-  "medicamentos": ["losartana"],
-  "sinais_vitais": {
-    "pressao_arterial": "150/90",
-    "frequencia_cardiaca": null
-  },
-  "alertas": ["mencao a dor no peito"],
-  "fonte": "texto_simulado",
-  "observacao": "Extracao academica. Nao substitui avaliacao medica."
-}
-```
-
-## Organização sugerida
+## Estrutura
 
 ```text
 frente-4-ir-alem-1/
+|-- .env.example
+|-- extracao_clinica.py
+|-- requirements.txt
 |-- README.md
-|-- extracao_clinica.ipynb
 `-- exemplos/
-    `-- laudo_simulado.txt
+    |-- caso_01.txt
+    |-- caso_02.txt
+    `-- caso_03.txt
 ```
 
-O PDF final vai para `docs/relatorio_ir_alem1_ia_generativa.pdf`.
+O relatório da frente está¡ em `docs/relatorio_ir_alem1_ia_generativa.pdf`.
 
-## Contrato com as outras frentes
+## Instalação
 
-- Pode reutilizar as entities da Frente 1 como nomes de campos do JSON.
-- Integração no Flask (Frente 2) é desejável, não obrigatória para este Ir Além.
-- A Frente 5 pode persistir o JSON extraído no banco não relacional como metadado do processo.
+Use Python 3.10 ou superior. No terminal, a partir desta pasta:
 
-## Entregáveis
+```bash
+python -m venv .venv
 
-- Notebook ou código Python com a implementação.
-- Documento em PDF explicando o fluxo usado no projeto.
+# Windows
+.venv\Scripts\activate
 
-## Critérios do enunciado
+# Linux/macOS
+source .venv/bin/activate
 
-- Uso correto das técnicas vistas em aula.
-- Estruturação adequada da saída.
-- Clareza na explicação do processo.
+pip install -r requirements.txt
+```
 
+Copie `.env.example` para `.env` e preencha a chave criada no Google AI Studio:
+
+```env
+GEMINI_API_KEY=sua_chave_aqui
+GEMINI_MODEL=gemini-3.6-flash
+```
+
+Nunca envie o arquivo `.env` para o GitHub.
+
+## Execução
+
+Com um arquivo de exemplo:
+
+```bash
+python extracao_clinica.py --arquivo exemplos/caso_01.txt
+```
+
+Digitando o texto no terminal:
+
+```bash
+python extracao_clinica.py --texto "Paciente relata tontura e usa losartana."
+```
+
+Salvando a resposta:
+
+```bash
+python extracao_clinica.py --arquivo exemplos/caso_02.txt --saida resultado.json
+```
+
+O programa exibe o JSON validado e informa o arquivo criado quando `--saida` for usado.
+
+## Campos do JSON
+
+| Campo | Conteúdo |
+|---|---|
+| `sintomas` | sintomas afirmados no texto |
+| `fatores_risco` | fatores de risco expressamente mencionados |
+| `medicamentos` | medicamentos citados |
+| `sinais_vitais` | pressão arterial, frequência cardí­aca e saturação |
+| `alertas` | sinais de alerta expressamente afirmados |
+| `informacoes_negadas` | condições que o texto declara ausentes |
+| `fonte` | origem acadêmica do conteúdo |
+| `observacao` | aviso sobre a limitação da extração |
+
+## Estratégia contra alucinações
+
+O prompt exige fidelidade literal ao texto, proí­be diagnóstico e inferências e define como representar dados ausentes. Além disso, a resposta da API são solicitada em JSON conforme um schema tipado. O Pydantic valida o resultado antes da exibição ou gravação.
+
+Mesmo com essas barreiras, uma IA generativa pode errar. Por isso, a saí­da deve sempre ser revisada por uma pessoa e não pode ser usada para decisões clí­nicas reais.
 
