@@ -17,7 +17,7 @@ Arquivos desta pasta entram no README principal e nos relatórios de cada frente
 | `06-try-it-triagem.png` | Try it: tontura → desde ontem → forte → resumo organizado |
 | `07-try-it-emergencia.png` | Try it: palpitação e, no meio da triagem, aperto no peito → orientação 192 |
 
-## Frente 3 — Interface (a anexar depois do vídeo)
+## Frente 3 — Interface
 
 | Arquivo | O que mostrar |
 |---|---|
