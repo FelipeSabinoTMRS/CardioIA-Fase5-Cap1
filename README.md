@@ -12,11 +12,11 @@
 
 | Integrante | GitHub | Frente |
 |---|---|---|
-| Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | 3. Interface e vídeo |
 | Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | 1. Watson Assistant |
-| Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | 5. Ir Além 2 |
 | Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | 2. Backend Flask |
+| Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | 3. Interface e vídeo |
 | Paulo Henrique Senise | [@PauloSenise](https://github.com/PauloSenise) | 4. Ir Além 1 |
+| Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | 5. Ir Além 2 |
 
 ## Descrição
 
