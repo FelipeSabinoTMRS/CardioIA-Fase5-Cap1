@@ -1,7 +1,6 @@
 # Frente 4 — Ir Além 1: IA generativa e extração clínica
 
 **Disciplina de referência:** IA Generativa e prompting  
-**Tipo:** expansão (fora da nota base de 10 pontos da Parte 1 e 2)
 
 ## Objetivo
 
