@@ -1,18 +1,18 @@
-﻿# Frente 4 - Ir AlÃ©m 1: IA generativa e extraÃ§Ã£o clÃ­nica
+﻿# Frente 4 - Ir Alémm 1: IA generativa e extração clí­nica
 
-Esta frente demonstra como transformar um texto clÃ­nico fictÃ­cio e nÃ£o estruturado em um JSON padronizado usando IA generativa. O modelo recebe instruÃ§Ãµes explÃ­citas para nÃ£o completar, inferir ou inventar informaÃ§Ãµes ausentes.
+Esta frente demonstra como transformar um texto clí­nico fictcio e não estruturado em um JSON padronizado usando IA generativa. O modelo recebe instruções explicativas para não completar, inferir ou inventar informações ausentes.
 
-> Projeto exclusivamente acadÃªmico. A saÃ­da nÃ£o constitui diagnÃ³stico, orientaÃ§Ã£o mÃ©dica ou atendimento de emergÃªncia.
+> Projeto exclusivamente acadêmico. A saída não constitui diagnostico, orientação médica ou atendimento de emergência.
 
 ## O que foi implementado
 
 - leitura de texto digitado ou de arquivo `.txt`;
-- extraÃ§Ã£o com a API Gemini;
+- extração com a API Gemini;
 - resposta estruturada por schema Pydantic;
 - campos ausentes representados por listas vazias ou `null`;
-- separaÃ§Ã£o de informaÃ§Ãµes afirmadas e negadas;
-- validaÃ§Ã£o automÃ¡tica antes de salvar o JSON;
-- exemplos clÃ­nicos totalmente fictÃ­cios.
+- separação de informações afirmadas e negadas;
+- validações automáticas antes de salvar o JSON;
+- exemplos clí­nicos totalmente fict­cios.
 
 ## Estrutura
 
@@ -28,9 +28,9 @@ frente-4-ir-alem-1/
     `-- caso_03.txt
 ```
 
-O relatÃ³rio da frente estÃ¡ em `docs/relatorio_ir_alem1_ia_generativa.pdf`.
+O relatório da frente está¡ em `docs/relatorio_ir_alem1_ia_generativa.pdf`.
 
-## InstalaÃ§Ã£o
+## Instalação
 
 Use Python 3.10 ou superior. No terminal, a partir desta pasta:
 
@@ -55,7 +55,7 @@ GEMINI_MODEL=gemini-3.6-flash
 
 Nunca envie o arquivo `.env` para o GitHub.
 
-## ExecuÃ§Ã£o
+## Execução
 
 Com um arquivo de exemplo:
 
@@ -79,20 +79,20 @@ O programa exibe o JSON validado e informa o arquivo criado quando `--saida` for
 
 ## Campos do JSON
 
-| Campo | ConteÃºdo |
+| Campo | Conteúdo |
 |---|---|
 | `sintomas` | sintomas afirmados no texto |
 | `fatores_risco` | fatores de risco expressamente mencionados |
 | `medicamentos` | medicamentos citados |
-| `sinais_vitais` | pressÃ£o arterial, frequÃªncia cardÃ­aca e saturaÃ§Ã£o |
+| `sinais_vitais` | pressão arterial, frequência cardí­aca e saturação |
 | `alertas` | sinais de alerta expressamente afirmados |
-| `informacoes_negadas` | condiÃ§Ãµes que o texto declara ausentes |
-| `fonte` | origem acadÃªmica do conteÃºdo |
-| `observacao` | aviso sobre a limitaÃ§Ã£o da extraÃ§Ã£o |
+| `informacoes_negadas` | condições que o texto declara ausentes |
+| `fonte` | origem acadêmica do conteúdo |
+| `observacao` | aviso sobre a limitação da extração |
 
-## EstratÃ©gia contra alucinaÃ§Ãµes
+## Estratégia contra alucinações
 
-O prompt exige fidelidade literal ao texto, proÃ­be diagnÃ³stico e inferÃªncias e define como representar dados ausentes. AlÃ©m disso, a resposta da API Ã© solicitada em JSON conforme um schema tipado. O Pydantic valida o resultado antes da exibiÃ§Ã£o ou gravaÃ§Ã£o.
+O prompt exige fidelidade literal ao texto, proí­be diagnóstico e inferências e define como representar dados ausentes. Além disso, a resposta da API são solicitada em JSON conforme um schema tipado. O Pydantic valida o resultado antes da exibição ou gravação.
 
-Mesmo com essas barreiras, uma IA generativa pode errar. Por isso, a saÃ­da deve sempre ser revisada por uma pessoa e nÃ£o pode ser usada para decisÃµes clÃ­nicas reais.
+Mesmo com essas barreiras, uma IA generativa pode errar. Por isso, a saÃ­da deve sempre ser revisada por uma pessoa e não pode ser usada para decisões clí­nicas reais.
 
