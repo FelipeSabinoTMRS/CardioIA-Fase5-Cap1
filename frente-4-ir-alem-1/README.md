@@ -61,6 +61,4 @@ O PDF final vai para `docs/relatorio_ir_alem1_ia_generativa.pdf`.
 - Estruturação adequada da saída.
 - Clareza na explicação do processo.
 
-## Fora desta frente
 
-Skill do Watson, tela de chat e o robô RPA da Frente 5.
