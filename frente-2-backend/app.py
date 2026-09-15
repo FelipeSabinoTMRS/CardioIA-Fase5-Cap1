@@ -2,8 +2,9 @@
 
 Recebe a mensagem do usuário, envia ao IBM watsonx Assistant e devolve a
 resposta para a interface (Frente 3). Estrutura baseada no exemplo Flask do
-material da disciplina PCV (Cap. 10): rota ``/`` com ``index.html`` e rota
-``POST /api/chat`` que recebe ``{"message": ...}`` e responde ``{"response": ...}``.
+material da disciplina PCV (Cap. 10): rota ``/`` com a interface oficial da
+Frente 3 e rota ``POST /api/chat`` que recebe ``{"message": ...}`` e responde
+``{"response": ...}``. A página de teste do backend permanece em ``/teste``.
 
 Diferenças em relação ao material, pedidas no README da frente:
 - ``session_id`` é devolvido e pode ser reenviado para manter o contexto;
@@ -14,9 +15,10 @@ Diferenças em relação ao material, pedidas no README da frente:
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from ibm_watson import ApiException
 
 from watson_client import (
@@ -26,6 +28,10 @@ from watson_client import (
 )
 
 load_dotenv()
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = ROOT_DIR / "frente-3-frontend"
+ASSETS_DIR = ROOT_DIR / "assets"
 
 DISCLAIMER = (
     "Simulação acadêmica (FIAP, CardioIA Fase 5). Não substitui avaliação médica. "
@@ -45,6 +51,22 @@ def create_app(client: WatsonAssistantClient | None = None) -> Flask:
 
     @app.route("/")
     def index():
+        return send_from_directory(FRONTEND_DIR, "index.html")
+
+    @app.route("/styles.css")
+    def frontend_css():
+        return send_from_directory(FRONTEND_DIR, "styles.css")
+
+    @app.route("/app.js")
+    def frontend_js():
+        return send_from_directory(FRONTEND_DIR, "app.js")
+
+    @app.route("/assets/<path:filename>")
+    def repo_assets(filename):
+        return send_from_directory(ASSETS_DIR, filename)
+
+    @app.route("/teste")
+    def index_teste():
         return render_template("index.html", disclaimer=DISCLAIMER)
 
     @app.route("/api/health", methods=["GET"])
