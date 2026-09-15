@@ -8,6 +8,8 @@
 
 **FIAP | Tecnólogo em Inteligência Artificial | Fase 5 | Capítulo 1**
 
+**Vídeo de demonstração:** [Assistir no YouTube](https://youtu.be/Y3m6f8fgczU)
+
 ## Grupo 49
 
 | Integrante | GitHub | Frente |
@@ -131,8 +133,8 @@ Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 - [x] Fluxo com respostas contextualizadas e tratamento de exceção
 - [x] Backend Flask integrado à API do Watson
 - [x] Interface funcional (HTML ou React Native)
-- [ ] Repositório GitHub organizado (tornar público na hora da entrega)
-- [x] Vídeo de até 3 minutos
+- [ ] Repositório GitHub organizado e público (o repositório ainda está privado)
+- [x] Vídeo de até 3 minutos — [link da demonstração](https://youtu.be/Y3m6f8fgczU)
 - [x] Relatório curto do fluxo conversacional
 - [x] Ir Além 1: extração clínica com IA generativa + PDF
 - [ ] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
