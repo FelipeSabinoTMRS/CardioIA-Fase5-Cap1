@@ -68,6 +68,8 @@ def test_index_renders_frente3_interface(client):
     assert res.status_code == 200
     assert "Simulação acadêmica".encode("utf-8") in res.data
     assert b'id="userInput"' in res.data
+    assert b'lang="pt-BR"' in res.data
+    assert b'spellcheck="false"' in res.data
 
 
 def test_frontend_assets_are_served(client):
