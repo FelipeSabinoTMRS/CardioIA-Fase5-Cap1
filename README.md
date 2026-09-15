@@ -133,7 +133,7 @@ Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 - [x] Fluxo com respostas contextualizadas e tratamento de exceção
 - [x] Backend Flask integrado à API do Watson
 - [x] Interface funcional (HTML ou React Native)
-- [ ] Repositório GitHub organizado e público (o repositório ainda está privado)
+- [x] Repositório GitHub organizado e público
 - [x] Vídeo de até 3 minutos — [link da demonstração](https://youtu.be/Y3m6f8fgczU)
 - [x] Relatório curto do fluxo conversacional
 - [x] Ir Além 1: extração clínica com IA generativa + PDF
