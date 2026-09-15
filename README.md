@@ -8,7 +8,7 @@
 
 **FIAP | Tecnólogo em Inteligência Artificial | Fase 5 | Capítulo 1**
 
-## Grupo 72
+## Grupo 49
 
 | Integrante | GitHub | Frente |
 |---|---|---|
