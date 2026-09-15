@@ -94,5 +94,5 @@ O programa exibe o JSON validado e informa o arquivo criado quando `--saida` for
 
 O prompt exige fidelidade literal ao texto, proí­be diagnóstico e inferências e define como representar dados ausentes. Além disso, a resposta da API são solicitada em JSON conforme um schema tipado. O Pydantic valida o resultado antes da exibição ou gravação.
 
-Mesmo com essas barreiras, uma IA generativa pode errar. Por isso, a saÃ­da deve sempre ser revisada por uma pessoa e não pode ser usada para decisões clí­nicas reais.
+Mesmo com essas barreiras, uma IA generativa pode errar. Por isso, a saí­da deve sempre ser revisada por uma pessoa e não pode ser usada para decisões clí­nicas reais.
 
