@@ -8,15 +8,17 @@
 
 **FIAP | Tecnólogo em Inteligência Artificial | Fase 5 | Capítulo 1**
 
+**Vídeo de demonstração:** [Assistir no YouTube](https://youtu.be/Y3m6f8fgczU)
+
 ## Grupo 49
 
 | Integrante | GitHub | Frente |
 |---|---|---|
-| Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | a escolher |
-| Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | 2. Backend Flask |
-| Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | a escolher |
-| Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | 1. Watson Assistant |
+| Juan Felipe Voltolini | [@juanvoltolini-rm562890](https://github.com/juanvoltolini-rm562890) | 1. Watson Assistant |
+| Marco Aurélio Eberhardt Assumpção | [@marcofiap](https://github.com/marcofiap) | 2. Backend Flask |
+| Felipe Sabino da Silva | [@FelipeSabinoTMRS](https://github.com/FelipeSabinoTMRS) | 3. Interface e vídeo |
 | Paulo Henrique Senise | [@PauloSenise](https://github.com/PauloSenise) | 4. Ir Além 1 |
+| Luiz Henrique Ribeiro de Oliveira | [@Luiz-FIAP](https://github.com/Luiz-FIAP) | 5. Ir Além 2 |
 
 ## Descrição
 
@@ -91,6 +93,21 @@ As Frentes 1, 2 e 3 fecham a nota base. As Frentes 4 e 5 são os Ir Além e entr
 `-- README.md
 ```
 
+## Como executar a interface
+
+A Frente 3 é HTML/CSS/JS servida pelo Flask da Frente 2, na mesma origem.
+
+```bash
+cd frente-2-backend
+source .venv/bin/activate
+# .env com WA_API_KEY, WA_URL e WA_ASSISTANT_ID (veja frente-2-backend/README.md)
+python app.py
+```
+
+Abrir http://127.0.0.1:5050. Não abra o `index.html` direto no disco: o chat depende de `/api/chat`.
+
+Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
+
 ## Como trabalhar neste repositório
 
 1. Uma branch por frente: `frente-1`, `frente-2`, `frente-3`, `frente-4`, `frente-5`.
@@ -115,9 +132,9 @@ As Frentes 1, 2 e 3 fecham a nota base. As Frentes 4 e 5 são os Ir Além e entr
 - [x] Assistente modelado no Watson Assistant (intents, entities, dialog nodes)
 - [x] Fluxo com respostas contextualizadas e tratamento de exceção
 - [x] Backend Flask integrado à API do Watson
-- [ ] Interface funcional (HTML ou React Native)
-- [ ] Repositório GitHub organizado (tornar público na hora da entrega)
-- [ ] Vídeo de até 3 minutos
+- [x] Interface funcional (HTML ou React Native)
+- [ ] Repositório GitHub organizado e público (o repositório ainda está privado)
+- [x] Vídeo de até 3 minutos — [link da demonstração](https://youtu.be/Y3m6f8fgczU)
 - [x] Relatório curto do fluxo conversacional
 - [x] Ir Além 1: extração clínica com IA generativa + PDF
 - [ ] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
@@ -130,6 +147,12 @@ As Frentes 1, 2 e 3 fecham a nota base. As Frentes 4 e 5 são os Ir Além e entr
 - [`frente-3-frontend/README.md`](frente-3-frontend/README.md)
 - [`frente-4-ir-alem-1/README.md`](frente-4-ir-alem-1/README.md)
 - [`frente-5-ir-alem-2/README.md`](frente-5-ir-alem-2/README.md)
+
+## Links para entrega
+
+- GitHub: <https://github.com/FelipeSabinoTMRS/CardioIA-Fase5-Cap1>
+- Interface local: <http://127.0.0.1:5050>
+- Vídeo (até 3 minutos): [Demonstração da interface no YouTube](https://youtu.be/Y3m6f8fgczU) — roteiro em [`docs/roteiro_video.md`](docs/roteiro_video.md)
 
 ## Observação acadêmica
 

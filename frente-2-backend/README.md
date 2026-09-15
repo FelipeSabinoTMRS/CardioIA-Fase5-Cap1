@@ -21,9 +21,9 @@ A implementação segue o exemplo Flask + Watson do material (Cap. 10, Código-f
 
 ```text
 frente-2-backend/
-|-- app.py                 # Flask: GET /, GET /api/health, POST /api/chat
+|-- app.py                 # Flask: GET / (Frente 3), GET /teste, GET /api/health, POST /api/chat
 |-- watson_client.py       # cliente do Watson (sessão, mensagem, parse da resposta)
-|-- templates/index.html   # página de teste do backend (a interface oficial é da Frente 3)
+|-- templates/index.html   # página de teste do backend em /teste
 |-- scripts/smoke_chat.py  # conversa real pelo terminal com as credenciais do .env
 |-- tests/                 # pytest sem rede (SDK e cliente substituídos por dublês)
 |-- requirements.txt
@@ -42,7 +42,7 @@ python3.12 -m venv .venv            # ou: uv venv --python 3.12 .venv
 source .venv/bin/activate           # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env                # preencher WA_API_KEY, WA_URL, WA_ASSISTANT_ID (e WA_ENVIRONMENT_ID, se houver)
-python app.py                       # http://127.0.0.1:5050
+python app.py                       # http://127.0.0.1:5050  (interface da Frente 3 em /)
 ```
 
 Testes (não precisam de credenciais nem de internet):
@@ -126,8 +126,8 @@ variável estiver preenchida, o backend usa os métodos do SDK. Se estiver vazia
 ## Contrato com as outras frentes
 
 - **Frente 1** entrega a skill publicada no assistant apontado por `WA_ASSISTANT_ID`.
-- **Frente 3** consome `POST /api/chat` e `GET /api/health`. Pode substituir `templates/index.html` pela
-  interface final ou rodar em outra origem (nesse caso, combinar CORS com quem cuida do backend).
+- **Frente 3** é servida em `GET /` (`frente-3-frontend/`). Consome `POST /api/chat` e `GET /api/health`
+  na mesma origem, então não precisa de CORS. A página de teste do backend ficou em `/teste`.
 - **Frente 5** pode gravar `intent` e `session_id` de cada turno no banco não relacional.
 
 ## Limitações conhecidas

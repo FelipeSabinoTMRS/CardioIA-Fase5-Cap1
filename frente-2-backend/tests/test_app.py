@@ -63,10 +63,31 @@ def test_health_without_client_and_without_env(monkeypatch):
     assert res.get_json()["watson_configured"] is False
 
 
-def test_index_renders_test_page(client):
+def test_index_renders_frente3_interface(client):
     res = client.get("/")
     assert res.status_code == 200
     assert "Simulação acadêmica".encode("utf-8") in res.data
+    assert b'id="userInput"' in res.data
+    assert b'lang="pt-BR"' in res.data
+    assert b'spellcheck="false"' in res.data
+
+
+def test_frontend_assets_are_served(client):
+    css = client.get("/styles.css")
+    js = client.get("/app.js")
+    logo = client.get("/assets/logo-fiap.png")
+    assert css.status_code == 200
+    assert "border-radius" in css.get_data(as_text=True)
+    assert js.status_code == 200
+    assert "/api/chat" in js.get_data(as_text=True)
+    assert "session_id" in js.get_data(as_text=True)
+    assert logo.status_code == 200
+
+
+def test_backend_test_page_still_available(client):
+    res = client.get("/teste")
+    assert res.status_code == 200
+    assert "Página de teste da Frente 2".encode("utf-8") in res.data
 
 
 def test_chat_creates_session_and_returns_material_contract(client, fake_client):

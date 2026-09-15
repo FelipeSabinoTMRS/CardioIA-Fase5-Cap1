@@ -136,13 +136,16 @@ class WatsonAssistantClient:
 
     # ----- mensagem -------------------------------------------------------
 
-    def send_message(self, session_id: str, text: str) -> WatsonReply:
+    def send_message(self, session_id: str, text: str, user_id: str | None = None) -> WatsonReply:
         """Envia ``text`` na sessão e devolve a resposta interpretada.
 
         Levanta ``WatsonSessionExpired`` quando o Watson responde 404 para a
-        sessão, para que o chamador crie outra e reenvie.
+        sessão, para que o chamador crie outra e reenvie. A API de ambientes
+        também exige um ``user_id``; quando a interface não informa um, o
+        identificador da sessão é usado como identidade anônima da conversa.
         """
         message_input = {"message_type": "text", "text": text}
+        user_id = user_id or f"session:{session_id}"
         try:
             if self.environment_id:
                 raw = self.assistant.message(
@@ -150,6 +153,7 @@ class WatsonAssistantClient:
                     environment_id=self.environment_id,
                     session_id=session_id,
                     input=message_input,
+                    user_id=user_id,
                 ).get_result()
             else:
                 raw = self._legacy_request(

@@ -5,20 +5,9 @@
 
 ## Objetivo
 
-Criar uma interface simples para o paciente conversar com o assistente, manter o GitHub organizado e gravar o vídeo de até 3 minutos.
+Interface simples para o paciente conversar com o Assistente Cardiológico. O chat envia a mensagem ao Flask da Frente 2, que fala com o Watson da Frente 1. Não há mock na entrega.
 
-O enunciado aceita HTML ou uma aplicação básica em React Native. O caminho mais direto para a nota é HTML + CSS + JavaScript consumindo o Flask da Frente 2.
-
-## O que fazer
-
-1. Tela de chat: o usuário envia mensagem e vê a resposta do assistente.
-2. Integrar com `POST /api/chat` do backend. Sem mock na entrega final.
-3. Deixar claro na interface que se trata de simulação acadêmica.
-4. Organizar o repositório (README, pastas, `.gitignore`) junto com o restante do grupo.
-5. Gravar vídeo de até 3 minutos com um fluxo real: saudação, sintoma, urgência e fallback.
-6. Escrever o roteiro em `docs/roteiro_video.md` e colocar o link do vídeo no README principal.
-
-## Organização sugerida
+## Estrutura
 
 ```text
 frente-3-frontend/
@@ -28,27 +17,48 @@ frente-3-frontend/
 `-- app.js
 ```
 
-Se a equipe escolher React Native, documente aqui como subir o app e aponte o backend local.
+O Flask (`frente-2-backend/app.py`) serve estes arquivos na mesma origem:
 
-## Contrato com as outras frentes
+| Rota | Arquivo |
+|---|---|
+| `GET /` | `index.html` |
+| `GET /styles.css` | `styles.css` |
+| `GET /app.js` | `app.js` |
+| `GET /assets/...` | logo e evidências da raiz do repo |
 
-- Frente 2 precisa estar no ar para a interface e o vídeo.
-- Frente 1 define o texto que aparece na tela.
-- Frentes 4 e 5 podem ganhar uma tela extra depois (colar laudo ou ver alerta). Isso é opcional e não bloqueia a Parte 2.
+Não abra o `index.html` direto no navegador (origem `file://`). O `fetch` para `/api/chat` só funciona com o backend no ar.
+
+## Como rodar
+
+1. Preencher `frente-2-backend/.env` com as credenciais do Watson (veja o README da Frente 2).
+2. Subir o backend:
+
+```bash
+cd frente-2-backend
+source .venv/bin/activate          # se o venv ainda não existir, siga o README da Frente 2
+python app.py
+```
+
+3. Abrir http://127.0.0.1:5050
+
+A página de teste antiga do backend continua em http://127.0.0.1:5050/teste.
+
+## O que a tela faz
+
+- Mostra o aviso de simulação acadêmica o tempo todo.
+- Confere `GET /api/health` ao abrir (conectado / sem credencial / backend offline).
+- Envia `POST /api/chat` com `{ "message", "session_id" }` e reutiliza o `session_id` para manter o contexto.
+- Exibe a resposta do Watson (`response` / `reply`) e, abaixo, a intent e as entidades do turno.
+- Botões de atalho para o roteiro do vídeo: saudação, sintoma, emergência e fora de escopo.
+
+A primeira fala do CardioIA na tela é o mesmo texto do nó **Bem-vindo** da skill. As demais respostas vêm só da API.
 
 ## Entregáveis
 
-- Interface funcional integrada ao backend.
-- Repositório organizado (esta frente ajuda a fechar README, evidências e link do vídeo).
-- Vídeo curto (até 3 minutos) demonstrando a interação.
+- Interface funcional integrada ao backend: esta pasta + rotas no Flask.
+- Repositório organizado: README desta frente e seção de execução no README principal.
+- Vídeo de até 3 minutos: roteiro em [`docs/roteiro_video.md`](../docs/roteiro_video.md). O link entra no README principal depois da gravação.
 
 ## Fora desta frente
 
-Skill do Watson, cliente da API IBM e os notebooks/robôs dos Ir Além.
-
-## Como rodar (preencher quando o código existir)
-
-```bash
-# 1. subir o backend da Frente 2
-# 2. abrir index.html pelo servidor local combinado com o grupo
-```
+Skill do Watson, cliente da API IBM, notebook de extração e robô RPA.

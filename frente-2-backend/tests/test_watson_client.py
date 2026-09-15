@@ -66,8 +66,8 @@ class FakeAssistantV2:
         self.calls.append(("create_session", assistant_id, environment_id))
         return FakeDetailedResponse({"session_id": "sess-123"})
 
-    def message(self, assistant_id, environment_id, session_id, input=None):
-        self.calls.append(("message", assistant_id, environment_id, session_id, input))
+    def message(self, assistant_id, environment_id, session_id, input=None, user_id=None):
+        self.calls.append(("message", assistant_id, environment_id, session_id, input, user_id))
         if self.fail_message_with:
             raise ApiException(self.fail_message_with, message="Invalid Session")
         return FakeDetailedResponse(SAMPLE_RESPONSE)
@@ -106,6 +106,7 @@ def test_client_with_environment_id_uses_sdk_methods(fake_sdk):
     assert sdk.calls[0] == ("create_session", "asst-1", "env-1")
     assert sdk.calls[1][:4] == ("message", "asst-1", "env-1", "sess-123")
     assert sdk.calls[1][4] == {"message_type": "text", "text": "Estou com falta de ar"}
+    assert sdk.calls[1][5] == "session:sess-123"
 
 
 def test_client_without_environment_id_uses_legacy_route(fake_sdk):

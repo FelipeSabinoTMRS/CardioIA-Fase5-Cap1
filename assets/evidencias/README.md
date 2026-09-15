@@ -16,3 +16,11 @@ Arquivos desta pasta entram no README principal e nos relatórios de cada frente
 | `05-no-emergencia.png` | Nó Emergência: condição `#emergencia \|\| @sinal_alerta`, contexto e resposta |
 | `06-try-it-triagem.png` | Try it: tontura → desde ontem → forte → resumo organizado |
 | `07-try-it-emergencia.png` | Try it: palpitação e, no meio da triagem, aperto no peito → orientação 192 |
+
+## Frente 3 — Interface
+
+| Arquivo | O que mostrar |
+|---|---|
+| `08-interface-chat.png` | Tela inicial com aviso acadêmico e status conectado |
+| `09-interface-triagem.png` | Triagem de palpitação até o resumo |
+| `10-interface-emergencia.png` | Resposta de emergência / 192 |

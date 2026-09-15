@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CardioIA — Assistente Cardiológico</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div class="brand">
+                <img src="/assets/logo-fiap.png" alt="FIAP" class="logo">
+                <div>
+                    <p class="eyebrow">FIAP · CardioIA · Fase 5</p>
+                    <h1>Assistente Cardiológico</h1>
+                </div>
+            </div>
+            <p id="status" class="status status-loading" role="status">Verificando backend...</p>
+        </header>
+
+        <p class="disclaimer" role="note">
+            Simulação acadêmica (FIAP, CardioIA Fase 5). Este assistente não substitui avaliação médica,
+            não indica dose e não interpreta laudo. Em caso de dor no peito, falta de ar intensa,
+            desmaio ou sinais de AVC, ligue 192 ou procure emergência.
+        </p>
+
+        <main class="chat" aria-label="Conversa com o assistente">
+            <div id="messages" class="messages" aria-live="polite"></div>
+        </main>
+
+        <section class="composer" aria-label="Enviar mensagem">
+            <div id="suggestions" class="suggestions">
+                <button type="button" data-text="Oi">Saudação</button>
+                <button type="button" data-text="tenho sentido palpitação">Sintoma</button>
+                <button type="button" data-text="estou com dor forte no peito">Emergência</button>
+                <button type="button" data-text="qual o placar do jogo">Fora de escopo</button>
+            </div>
+            <form id="chatForm">
+                <label class="sr-only" for="userInput">Mensagem</label>
+                <input
+                    id="userInput"
+                    type="text"
+                    lang="pt-BR"
+                    spellcheck="false"
+                    autocorrect="off"
+                    autocapitalize="sentences"
+                    autocomplete="off"
+                    placeholder="Escreva sua mensagem..."
+                >
+                <button id="sendBtn" type="submit">Enviar</button>
+            </form>
+        </section>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
