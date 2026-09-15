@@ -1,0 +1,2350 @@
+{
+  "name": "cardioia-skill",
+  "description": "CardioIA Fase 5 - atendimento inicial em saúde cardiológica (simulação acadêmica)",
+  "language": "pt-br",
+  "intents": [
+    {
+      "intent": "saudacao",
+      "description": "Paciente cumprimenta ou inicia a conversa",
+      "examples": [
+        {
+          "text": "Oi"
+        },
+        {
+          "text": "Olá"
+        },
+        {
+          "text": "Bom dia"
+        },
+        {
+          "text": "Boa tarde"
+        },
+        {
+          "text": "Boa noite"
+        },
+        {
+          "text": "Oi, tudo bem?"
+        },
+        {
+          "text": "Olá, preciso de ajuda"
+        },
+        {
+          "text": "E aí"
+        },
+        {
+          "text": "Oi CardioIA"
+        },
+        {
+          "text": "Olá, alguém aí?"
+        },
+        {
+          "text": "Bom dia, tudo bem com você?"
+        },
+        {
+          "text": "Oii"
+        }
+      ]
+    },
+    {
+      "intent": "sintomas",
+      "description": "Paciente relata um sintoma que não é sinal de alarme",
+      "examples": [
+        {
+          "text": "Estou sentindo cansaço"
+        },
+        {
+          "text": "Tenho sentido tontura"
+        },
+        {
+          "text": "Meu coração está acelerado"
+        },
+        {
+          "text": "Estou com palpitação"
+        },
+        {
+          "text": "Minhas pernas estão inchadas"
+        },
+        {
+          "text": "Sinto um pouco de falta de ar quando subo escada"
+        },
+        {
+          "text": "Estou com dor de cabeça"
+        },
+        {
+          "text": "Ando muito cansado ultimamente"
+        },
+        {
+          "text": "Sinto o coração batendo forte às vezes"
+        },
+        {
+          "text": "Meus tornozelos incharam"
+        },
+        {
+          "text": "Estou me sentindo fraco"
+        },
+        {
+          "text": "Tenho um sintoma para relatar"
+        },
+        {
+          "text": "Não estou me sentindo bem"
+        }
+      ]
+    },
+    {
+      "intent": "sinais_vitais",
+      "description": "Paciente informa ou pergunta sobre pressão, batimentos ou saturação",
+      "examples": [
+        {
+          "text": "Minha pressão deu 15 por 9"
+        },
+        {
+          "text": "Medi a pressão e deu 12 por 8"
+        },
+        {
+          "text": "Minha pressão está 140 por 90"
+        },
+        {
+          "text": "Meus batimentos estão em 110"
+        },
+        {
+          "text": "Minha frequência cardíaca está 55"
+        },
+        {
+          "text": "A saturação deu 93"
+        },
+        {
+          "text": "Pressão 13 por 8 é normal?"
+        },
+        {
+          "text": "Qual a pressão ideal?"
+        },
+        {
+          "text": "Quero informar minha pressão"
+        },
+        {
+          "text": "Meu batimento cardíaco está alto?"
+        },
+        {
+          "text": "Medi o pulso e deu 98"
+        },
+        {
+          "text": "Minha pressão está alta"
+        },
+        {
+          "text": "Qual frequência cardíaca é normal?"
+        }
+      ]
+    },
+    {
+      "intent": "medicamentos",
+      "description": "Dúvidas sobre remédios, dose, esquecimento ou efeitos",
+      "examples": [
+        {
+          "text": "Posso tomar o remédio da pressão agora?"
+        },
+        {
+          "text": "Esqueci de tomar a losartana"
+        },
+        {
+          "text": "Qual a dose do atenolol?"
+        },
+        {
+          "text": "Posso parar de tomar o remédio?"
+        },
+        {
+          "text": "Esse remédio dá tontura?"
+        },
+        {
+          "text": "Posso tomar AAS com dipirona?"
+        },
+        {
+          "text": "Tomei o remédio duas vezes sem querer"
+        },
+        {
+          "text": "Quero saber sobre meu medicamento"
+        },
+        {
+          "text": "O remédio do coração pode ser tomado à noite?"
+        },
+        {
+          "text": "Estou sem o meu remédio"
+        },
+        {
+          "text": "Posso trocar a marca do remédio?"
+        },
+        {
+          "text": "Tenho dúvida sobre a medicação"
+        }
+      ]
+    },
+    {
+      "intent": "exames",
+      "description": "Dúvidas sobre exames cardiológicos e resultados",
+      "examples": [
+        {
+          "text": "O que é um ecocardiograma?"
+        },
+        {
+          "text": "Para que serve o eletrocardiograma?"
+        },
+        {
+          "text": "O que significa o laudo do meu exame?"
+        },
+        {
+          "text": "Vou fazer um teste ergométrico, como funciona?"
+        },
+        {
+          "text": "O que é Holter?"
+        },
+        {
+          "text": "Preciso de jejum para o exame?"
+        },
+        {
+          "text": "Meu colesterol deu alto no exame"
+        },
+        {
+          "text": "Como é feito o MAPA?"
+        },
+        {
+          "text": "Pode me explicar meu exame?"
+        },
+        {
+          "text": "Quais exames avaliam o coração?"
+        },
+        {
+          "text": "Recebi o resultado do exame"
+        },
+        {
+          "text": "O médico pediu um cateterismo, o que é isso?"
+        }
+      ]
+    },
+    {
+      "intent": "agendamento",
+      "description": "Paciente quer marcar ou remarcar consulta",
+      "examples": [
+        {
+          "text": "Quero marcar retorno com o cardiologista"
+        },
+        {
+          "text": "Preciso agendar uma consulta"
+        },
+        {
+          "text": "Quero marcar uma consulta"
+        },
+        {
+          "text": "Tem horário com o médico amanhã?"
+        },
+        {
+          "text": "Gostaria de remarcar minha consulta"
+        },
+        {
+          "text": "Como faço para agendar?"
+        },
+        {
+          "text": "Quero uma consulta na próxima semana"
+        },
+        {
+          "text": "Marcar consulta de cardiologia"
+        },
+        {
+          "text": "Preciso ver um médico"
+        },
+        {
+          "text": "Pode agendar para mim?"
+        },
+        {
+          "text": "Quero consulta com nutricionista"
+        },
+        {
+          "text": "Quero agendar um horário"
+        }
+      ]
+    },
+    {
+      "intent": "prevencao",
+      "description": "Dicas de hábitos saudáveis e prevenção cardiovascular",
+      "examples": [
+        {
+          "text": "Como cuidar do coração?"
+        },
+        {
+          "text": "O que devo comer para baixar a pressão?"
+        },
+        {
+          "text": "Quais exercícios são bons para o coração?"
+        },
+        {
+          "text": "Como prevenir infarto?"
+        },
+        {
+          "text": "Posso comer sal?"
+        },
+        {
+          "text": "Dicas para uma vida saudável"
+        },
+        {
+          "text": "Como diminuir o colesterol?"
+        },
+        {
+          "text": "Fumar faz mal ao coração?"
+        },
+        {
+          "text": "Quanto tempo devo caminhar por dia?"
+        },
+        {
+          "text": "Beber álcool afeta a pressão?"
+        },
+        {
+          "text": "O que é bom para a saúde do coração?"
+        },
+        {
+          "text": "Como reduzir o risco de doença cardíaca?"
+        }
+      ]
+    },
+    {
+      "intent": "emergencia",
+      "description": "Sinais de alarme que exigem atendimento imediato",
+      "examples": [
+        {
+          "text": "Estou com dor forte no peito"
+        },
+        {
+          "text": "Não consigo respirar"
+        },
+        {
+          "text": "Meu peito está apertando muito"
+        },
+        {
+          "text": "Acho que estou infartando"
+        },
+        {
+          "text": "Meu pai desmaiou"
+        },
+        {
+          "text": "Estou com muita falta de ar"
+        },
+        {
+          "text": "Dor no peito que vai para o braço"
+        },
+        {
+          "text": "A boca ficou torta e a fala enrolada"
+        },
+        {
+          "text": "Estou passando muito mal"
+        },
+        {
+          "text": "Socorro"
+        },
+        {
+          "text": "É uma emergência"
+        },
+        {
+          "text": "Meu braço esquerdo está dormente e o peito dói"
+        },
+        {
+          "text": "Estou sufocando"
+        }
+      ]
+    },
+    {
+      "intent": "ajuda",
+      "description": "Paciente pergunta o que o assistente faz",
+      "examples": [
+        {
+          "text": "O que você faz?"
+        },
+        {
+          "text": "Me ajuda"
+        },
+        {
+          "text": "Quais são as opções?"
+        },
+        {
+          "text": "Como você pode me ajudar?"
+        },
+        {
+          "text": "Menu"
+        },
+        {
+          "text": "O que posso perguntar?"
+        },
+        {
+          "text": "Ajuda"
+        },
+        {
+          "text": "Quem é você?"
+        },
+        {
+          "text": "Para que serve esse chat?"
+        },
+        {
+          "text": "Não sei o que perguntar"
+        }
+      ]
+    },
+    {
+      "intent": "cancelar",
+      "description": "Paciente desiste da ação em andamento",
+      "examples": [
+        {
+          "text": "Cancelar"
+        },
+        {
+          "text": "Deixa pra lá"
+        },
+        {
+          "text": "Desisto"
+        },
+        {
+          "text": "Não quero mais"
+        },
+        {
+          "text": "Esquece"
+        },
+        {
+          "text": "Parar"
+        },
+        {
+          "text": "Quero cancelar"
+        },
+        {
+          "text": "Muda de assunto"
+        },
+        {
+          "text": "Voltar ao início"
+        },
+        {
+          "text": "Não precisa mais"
+        }
+      ]
+    },
+    {
+      "intent": "despedida",
+      "description": "Paciente agradece ou encerra a conversa",
+      "examples": [
+        {
+          "text": "Obrigado"
+        },
+        {
+          "text": "Obrigada, era só isso"
+        },
+        {
+          "text": "Tchau"
+        },
+        {
+          "text": "Até logo"
+        },
+        {
+          "text": "Valeu"
+        },
+        {
+          "text": "Muito obrigado pela ajuda"
+        },
+        {
+          "text": "Era só isso"
+        },
+        {
+          "text": "Até mais"
+        },
+        {
+          "text": "Encerrar conversa"
+        },
+        {
+          "text": "Boa noite, obrigado"
+        }
+      ]
+    },
+    {
+      "intent": "fora_de_escopo",
+      "description": "Assuntos sem relação com saúde cardiológica",
+      "examples": [
+        {
+          "text": "Qual o placar do jogo?"
+        },
+        {
+          "text": "Me conta uma piada"
+        },
+        {
+          "text": "Qual a previsão do tempo?"
+        },
+        {
+          "text": "Quanto está o dólar?"
+        },
+        {
+          "text": "Qual a capital da França?"
+        },
+        {
+          "text": "Me recomenda um filme"
+        },
+        {
+          "text": "Como faço um bolo de chocolate?"
+        },
+        {
+          "text": "Quem ganhou a eleição?"
+        },
+        {
+          "text": "Qual o melhor celular?"
+        },
+        {
+          "text": "Me ajuda com a lição de matemática"
+        },
+        {
+          "text": "Onde fica o shopping mais próximo?"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sinal_alerta",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "dor no peito",
+          "synonyms": [
+            "dor forte no peito",
+            "aperto no peito",
+            "peito apertando",
+            "peito doendo",
+            "dor torácica",
+            "dor no coração"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "falta de ar intensa",
+          "synonyms": [
+            "não consigo respirar",
+            "muita falta de ar",
+            "falta de ar forte",
+            "sufocando",
+            "sem ar"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "desmaio",
+          "synonyms": [
+            "desmaiei",
+            "desmaiou",
+            "perdi a consciência",
+            "apaguei"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "sinais de AVC",
+          "synonyms": [
+            "boca torta",
+            "fala enrolada",
+            "braço dormente",
+            "fraqueza de um lado",
+            "rosto paralisado"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sintoma",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "falta de ar",
+          "synonyms": [
+            "fôlego curto",
+            "dispneia",
+            "cansaço para respirar"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "cansaço",
+          "synonyms": [
+            "cansado",
+            "cansada",
+            "fadiga",
+            "fraqueza",
+            "fraco",
+            "fraca",
+            "exausto"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "palpitação",
+          "synonyms": [
+            "palpitações",
+            "coração acelerado",
+            "coração disparado",
+            "batedeira",
+            "taquicardia"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "tontura",
+          "synonyms": [
+            "tonto",
+            "tonta",
+            "vertigem",
+            "zonzo",
+            "zonza"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "inchaço",
+          "synonyms": [
+            "inchado",
+            "inchada",
+            "pernas inchadas",
+            "tornozelo inchado",
+            "edema"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "dor de cabeça",
+          "synonyms": [
+            "cefaleia",
+            "cabeça doendo",
+            "enxaqueca"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sinal_vital",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "pressão",
+          "synonyms": [
+            "pressão arterial",
+            "pressão alta",
+            "pressão baixa"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "frequência cardíaca",
+          "synonyms": [
+            "batimentos",
+            "batimento",
+            "pulso",
+            "bpm"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "saturação",
+          "synonyms": [
+            "oxigenação",
+            "oxigênio",
+            "oxímetro",
+            "saturação de oxigênio"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "medicamento",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "losartana",
+          "synonyms": [
+            "losartan",
+            "losartana potássica"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "atenolol",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "AAS",
+          "synonyms": [
+            "aspirina",
+            "ácido acetilsalicílico"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "enalapril",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "hidroclorotiazida",
+          "synonyms": [
+            "diurético"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "sinvastatina",
+          "synonyms": [
+            "estatina",
+            "remédio do colesterol"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "exame",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "eletrocardiograma",
+          "synonyms": [
+            "ECG",
+            "eletro"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ecocardiograma",
+          "synonyms": [
+            "ecocardiografia",
+            "ultrassom do coração"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "teste ergométrico",
+          "synonyms": [
+            "teste de esteira",
+            "ergometria"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Holter",
+          "synonyms": [
+            "holter 24 horas"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "MAPA",
+          "synonyms": [
+            "monitorização ambulatorial da pressão"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "exame de sangue",
+          "synonyms": [
+            "colesterol",
+            "hemograma",
+            "glicemia",
+            "triglicerídeos"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "periodo",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "hoje",
+          "synonyms": [
+            "agora",
+            "hoje de manhã",
+            "hoje cedo",
+            "há algumas horas",
+            "faz umas horas"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ontem",
+          "synonyms": [
+            "desde ontem",
+            "ontem à noite"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "há alguns dias",
+          "synonyms": [
+            "há dias",
+            "faz uns dias",
+            "uns dias",
+            "essa semana",
+            "dois dias",
+            "três dias"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "há mais de uma semana",
+          "synonyms": [
+            "uma semana",
+            "semana passada",
+            "duas semanas",
+            "há semanas"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "há mais de um mês",
+          "synonyms": [
+            "um mês",
+            "meses",
+            "faz tempo",
+            "há muito tempo"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "intensidade",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "leve",
+          "synonyms": [
+            "fraquinha",
+            "pouca",
+            "pouco",
+            "suportável"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "moderada",
+          "synonyms": [
+            "média",
+            "mais ou menos",
+            "razoável",
+            "moderado"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "forte",
+          "synonyms": [
+            "muito forte",
+            "intensa",
+            "insuportável",
+            "demais"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "especialidade",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "cardiologia",
+          "synonyms": [
+            "cardiologista",
+            "cardio",
+            "médico do coração"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "clínico geral",
+          "synonyms": [
+            "clínica geral",
+            "clínico",
+            "médico de família"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "nutrição",
+          "synonyms": [
+            "nutricionista",
+            "nutrólogo"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "turno",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "manhã",
+          "synonyms": [
+            "de manhã",
+            "pela manhã",
+            "cedo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "tarde",
+          "synonyms": [
+            "à tarde",
+            "de tarde",
+            "pela tarde"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "noite",
+          "synonyms": [
+            "à noite",
+            "de noite"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "pressao_medida",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "pressao_medida",
+          "patterns": [
+            "\\b\\d{1,3}\\s*(por|x|X)\\s*\\d{1,3}\\b"
+          ]
+        }
+      ],
+      "fuzzy_match": false
+    },
+    {
+      "entity": "sys-number",
+      "values": []
+    },
+    {
+      "entity": "sys-date",
+      "values": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "dialog_node": "bem_vindo",
+      "title": "Bem-vindo",
+      "conditions": "welcome",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Olá! Eu sou o CardioIA, assistente virtual de atendimento inicial em saúde do coração. Posso ajudar a: relatar sintomas, entender valores de pressão, batimentos e saturação, tirar dúvidas gerais sobre medicamentos, explicar exames do coração, simular o agendamento de uma consulta e dar dicas de prevenção. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica. Em caso de dor no peito ou falta de ar intensa, ligue 192."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "emergencia",
+      "title": "Emergência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "ATENÇÃO: dor no peito, falta de ar intensa, desmaio ou sinais como boca torta, fala enrolada e fraqueza de um lado do corpo podem indicar uma emergência. Ligue agora para o SAMU (192) ou vá ao pronto-socorro mais próximo. Não dirija sozinho e, se puder, peça ajuda a alguém por perto. Este assistente é uma simulação acadêmica e não substitui atendimento médico."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "context": {
+        "alerta_emergencia": true
+      },
+      "previous_sibling": "bem_vindo"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "saudacao",
+      "title": "Saudação",
+      "conditions": "#saudacao",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Olá! Sou o CardioIA. Posso ajudar a: relatar sintomas, entender valores de pressão, batimentos e saturação, tirar dúvidas gerais sobre medicamentos, explicar exames do coração, simular o agendamento de uma consulta e dar dicas de prevenção. Como posso ajudar hoje?"
+              },
+              {
+                "text": "Oi! Aqui é o CardioIA. Me conte o que está sentindo ou qual é a sua dúvida."
+              }
+            ],
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "previous_sibling": "emergencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sinais_vitais",
+      "title": "Sinais vitais",
+      "conditions": "#sinais_vitais || @pressao_medida",
+      "output": {},
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "saudacao"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "pa_crise",
+      "title": "Pressão muito elevada",
+      "conditions": "@pressao_medida && (@sys-number >= 180 || (@sys-number >= 18 && @sys-number < 30))",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Você informou pressão de $pressao. Esse valor é muito elevado. Se houver dor no peito, falta de ar, dor de cabeça forte, visão turva ou fraqueza, ligue 192 ou vá ao pronto-socorro agora. Mesmo sem sintomas, procure atendimento hoje. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "pressao": "@pressao_medida.literal",
+        "alerta_emergencia": true
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "pa_elevada",
+      "title": "Pressão elevada",
+      "conditions": "@pressao_medida && (@sys-number >= 140 || (@sys-number >= 14 && @sys-number < 30))",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Você informou pressão de $pressao, acima da referência de 14 por 9 (140/90 mmHg). Descanse 5 minutos sentado, meça de novo e anote. Se continuar alta, fale com seu médico. Não altere a dose do remédio por conta própria. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "pressao": "@pressao_medida.literal"
+      },
+      "previous_sibling": "pa_crise"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "pa_baixa",
+      "title": "Pressão baixa",
+      "conditions": "@pressao_medida && ((@sys-number >= 5 && @sys-number < 9) || (@sys-number >= 50 && @sys-number < 90))",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Você informou pressão de $pressao, um valor baixo. Sente-se ou deite-se e beba água. Se tiver tontura forte, desmaio ou confusão, procure atendimento. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "pressao": "@pressao_medida.literal"
+      },
+      "previous_sibling": "pa_elevada"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "pa_referencia",
+      "title": "Pressão na referência",
+      "conditions": "@pressao_medida",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Você informou pressão de $pressao, dentro da faixa de referência para adultos (abaixo de 14 por 9). Continue medindo com regularidade e siga as orientações do seu médico. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "pressao": "@pressao_medida.literal"
+      },
+      "previous_sibling": "pa_baixa"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "fc_extrema",
+      "title": "Frequência cardíaca extrema",
+      "conditions": "@sinal_vital:(frequência cardíaca) && (@sys-number > 150 || @sys-number < 40)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Frequência cardíaca de $frequencia_cardiaca bpm em repouso é um valor preocupante. Se vier com tontura, desmaio, dor no peito ou falta de ar, ligue 192. Procure atendimento hoje. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "frequencia_cardiaca": "@sys-number",
+        "alerta_emergencia": true
+      },
+      "previous_sibling": "pa_referencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "fc_alterada",
+      "title": "Frequência cardíaca fora da referência",
+      "conditions": "@sinal_vital:(frequência cardíaca) && (@sys-number > 100 || @sys-number < 50)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Frequência cardíaca de $frequencia_cardiaca bpm está fora da faixa usual em repouso (cerca de 50 a 100 bpm). Repouse, meça de novo e comente com seu médico, principalmente se sentir palpitação ou tontura. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "frequencia_cardiaca": "@sys-number"
+      },
+      "previous_sibling": "fc_extrema"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "fc_referencia",
+      "title": "Frequência cardíaca na referência",
+      "conditions": "@sinal_vital:(frequência cardíaca) && @sys-number",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Frequência cardíaca de $frequencia_cardiaca bpm está dentro da faixa usual em repouso (cerca de 50 a 100 bpm). Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "frequencia_cardiaca": "@sys-number"
+      },
+      "previous_sibling": "fc_alterada"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sat_baixa",
+      "title": "Saturação baixa",
+      "conditions": "@sinal_vital:saturação && @sys-number < 92",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Saturação de $saturacao% está baixa. Se houver falta de ar, lábios arroxeados ou confusão, ligue 192 ou vá ao pronto-socorro. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "saturacao": "@sys-number",
+        "alerta_emergencia": true
+      },
+      "previous_sibling": "fc_referencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sat_referencia",
+      "title": "Saturação informada",
+      "conditions": "@sinal_vital:saturação && @sys-number",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Saturação de $saturacao%. Em adultos saudáveis o esperado costuma ficar entre 95% e 100%; valores um pouco abaixo merecem acompanhamento médico. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "context": {
+        "saturacao": "@sys-number"
+      },
+      "previous_sibling": "sat_baixa"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sinais_sem_valor",
+      "title": "Sem valor informado",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Posso ajudar a entender seus valores. Envie assim: \"minha pressão deu 13 por 8\", \"meus batimentos estão em 80\" ou \"saturação 97\". Referências gerais para adultos em repouso: pressão abaixo de 14 por 9, frequência cardíaca entre 50 e 100 bpm e saturação entre 95% e 100%. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "sinais_vitais",
+      "previous_sibling": "sat_referencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "medicamentos",
+      "title": "Medicamentos",
+      "conditions": "#medicamentos",
+      "output": {},
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "sinais_vitais"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "medicamento_citado",
+      "title": "Caso medicamento citado",
+      "conditions": "@medicamento",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Sobre $medicamento: não posso indicar dose, horário nem troca de remédio. Siga a receita, não suspenda por conta própria e confirme dúvidas com seu médico ou farmacêutico. Se esqueceu uma dose, não dobre a próxima sem orientação. Se tomou a mais e está passando mal, procure atendimento. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "medicamentos",
+      "context": {
+        "medicamento": "@medicamento"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "medicamento_geral",
+      "title": "Outros medicamentos",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não posso indicar dose, horário nem troca de remédio. Siga a receita, não suspenda nem dobre doses por conta própria e leve suas dúvidas ao médico ou farmacêutico. Se tiver reação como falta de ar, inchaço no rosto ou desmaio, ligue 192. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "medicamentos",
+      "previous_sibling": "medicamento_citado"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exames",
+      "title": "Exames",
+      "conditions": "#exames",
+      "output": {},
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "medicamentos"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_1",
+      "title": "Caso eletrocardiograma",
+      "conditions": "@exame:(eletrocardiograma)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "O eletrocardiograma (ECG) registra a atividade elétrica do coração em poucos minutos e ajuda a avaliar o ritmo cardíaco. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_2",
+      "title": "Caso ecocardiograma",
+      "conditions": "@exame:(ecocardiograma)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "O ecocardiograma é um ultrassom do coração que mostra o tamanho das cavidades, a força de contração e as válvulas. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      },
+      "previous_sibling": "exame_1"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_3",
+      "title": "Caso teste ergométrico",
+      "conditions": "@exame:(teste ergométrico)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "O teste ergométrico avalia o coração durante esforço na esteira ou bicicleta, com monitoramento do ECG e da pressão. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      },
+      "previous_sibling": "exame_2"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_4",
+      "title": "Caso Holter",
+      "conditions": "@exame:(Holter)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "O Holter grava o ECG por 24 horas ou mais durante a rotina, para identificar arritmias que não aparecem em um exame rápido. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      },
+      "previous_sibling": "exame_3"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_5",
+      "title": "Caso MAPA",
+      "conditions": "@exame:(MAPA)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "O MAPA mede a pressão automaticamente várias vezes ao longo de 24 horas, inclusive durante o sono. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      },
+      "previous_sibling": "exame_4"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_6",
+      "title": "Caso exame de sangue",
+      "conditions": "@exame:(exame de sangue)",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Exames de sangue como colesterol, triglicerídeos e glicemia ajudam a estimar o risco cardiovascular. O preparo e a interpretação do resultado devem ser confirmados com o médico que pediu o exame. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "context": {
+        "exame": "@exame"
+      },
+      "previous_sibling": "exame_5"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "exame_geral",
+      "title": "Outros exames",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Posso explicar para que servem eletrocardiograma, ecocardiograma, teste ergométrico, Holter, MAPA e exames de sangue. Não interpreto laudos: leve o resultado ao seu médico. Qual exame você quer entender?"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "exames",
+      "previous_sibling": "exame_6"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "agendamento",
+      "title": "Agendamento (simulado)",
+      "conditions": "#agendamento",
+      "output": {},
+      "context": {
+        "especialidade": null,
+        "data_consulta": null,
+        "turno": null
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "exames"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "agendamento_com_especialidade",
+      "title": "Especialidade já informada",
+      "conditions": "@especialidade",
+      "output": {},
+      "parent": "agendamento",
+      "context": {
+        "especialidade": "@especialidade"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_data",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "agendamento_sem_especialidade",
+      "title": "Especialidade não informada",
+      "conditions": "anything_else",
+      "output": {},
+      "parent": "agendamento",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_especialidade",
+        "selector": "body"
+      },
+      "previous_sibling": "agendamento_com_especialidade"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "resumo_agendamento",
+      "title": "Resumo do agendamento",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Pedido de agendamento registrado (simulação): especialidade $especialidade, dia <? $data_consulta.reformatDateTime('dd/MM/yyyy') ?>, turno $turno. Nenhuma consulta real foi marcada. Se os sintomas piorarem antes da consulta, procure atendimento."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "agendamento"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "prevencao",
+      "title": "Prevenção",
+      "conditions": "#prevencao",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Algumas medidas gerais que protegem o coração: reduzir o sal e os ultraprocessados, preferir frutas, verduras e grãos integrais, fazer atividade física com liberação médica (cerca de 150 minutos por semana), não fumar, moderar o álcool, dormir bem e manter pressão, glicemia e colesterol acompanhados. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "resumo_agendamento"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "ajuda",
+      "title": "Ajuda",
+      "conditions": "#ajuda",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Posso ajudar a: relatar sintomas, entender valores de pressão, batimentos e saturação, tirar dúvidas gerais sobre medicamentos, explicar exames do coração, simular o agendamento de uma consulta e dar dicas de prevenção. Por exemplo: \"estou com tontura\", \"minha pressão deu 14 por 9\" ou \"quero marcar consulta\". Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "prevencao"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "cancelar",
+      "title": "Cancelar",
+      "conditions": "#cancelar",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Tudo bem, cancelei. Em que mais posso ajudar?"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "ajuda"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "despedida",
+      "title": "Despedida",
+      "conditions": "#despedida",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Por nada! Cuide-se. Se sentir dor no peito ou falta de ar intensa, ligue 192. Até logo!"
+              },
+              {
+                "text": "Foi um prazer ajudar. Lembre-se de levar suas dúvidas ao seu médico. Até mais!"
+              }
+            ],
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "previous_sibling": "cancelar"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "fora_de_escopo",
+      "title": "Fora de escopo",
+      "conditions": "#fora_de_escopo",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Esse assunto está fora do que eu sei fazer. Sou um assistente de saúde do coração. Posso ajudar a: relatar sintomas, entender valores de pressão, batimentos e saturação, tirar dúvidas gerais sobre medicamentos, explicar exames do coração, simular o agendamento de uma consulta e dar dicas de prevenção."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "despedida"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sintomas",
+      "title": "Triagem de sintomas",
+      "conditions": "#sintomas || @sintoma",
+      "output": {},
+      "context": {
+        "sintoma": null,
+        "periodo": null,
+        "intensidade": null
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "fora_de_escopo"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sintomas_com_sintoma",
+      "title": "Sintoma já informado",
+      "conditions": "@sintoma",
+      "output": {},
+      "parent": "sintomas",
+      "context": {
+        "sintoma": "@sintoma"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_periodo",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "sintomas_sem_sintoma",
+      "title": "Sintoma não informado",
+      "conditions": "anything_else",
+      "output": {},
+      "parent": "sintomas",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_sintoma",
+        "selector": "body"
+      },
+      "previous_sibling": "sintomas_com_sintoma"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_sintoma",
+      "title": "Perguntar sintoma",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Qual sintoma você está sentindo? (cansaço, tontura, palpitação, inchaço, falta de ar ou dor de cabeça)"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "sintomas"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_sintoma_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_sintoma",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_sintoma_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@sintoma",
+      "output": {},
+      "parent": "perguntar_sintoma",
+      "context": {
+        "sintoma": "@sintoma"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_periodo",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_sintoma_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_sintoma_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_sintoma",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_sintoma_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_sintoma_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não reconheci esse sintoma."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_sintoma",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_sintoma",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_sintoma_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_periodo",
+      "title": "Perguntar período",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Entendi: $sintoma. Desde quando você sente isso? (hoje, ontem, alguns dias, mais de uma semana ou mais de um mês)"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "perguntar_sintoma"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_periodo_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_periodo",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_periodo_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@periodo",
+      "output": {},
+      "parent": "perguntar_periodo",
+      "context": {
+        "periodo": "@periodo"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_intensidade",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_periodo_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_periodo_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_periodo",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_periodo_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_periodo_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não entendi o período."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_periodo",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_periodo",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_periodo_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_intensidade",
+      "title": "Perguntar intensidade",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "E qual a intensidade: leve, moderada ou forte?"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "perguntar_periodo"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_intensidade_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_intensidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_intensidade_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@intensidade",
+      "output": {},
+      "parent": "perguntar_intensidade",
+      "context": {
+        "intensidade": "@intensidade"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "resumo_sintomas",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_intensidade_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_intensidade_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_intensidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_intensidade_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_intensidade_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não entendi a intensidade."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_intensidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_intensidade",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_intensidade_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "resumo_sintomas",
+      "title": "Resumo dos sintomas",
+      "conditions": "false",
+      "output": {},
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "previous_sibling": "perguntar_intensidade"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "resumo_forte",
+      "title": "Caso intensidade forte",
+      "conditions": "$intensidade == 'forte'",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Resumo do que você relatou: sintoma $sintoma, início $periodo, intensidade $intensidade. Um sintoma forte merece avaliação presencial ainda hoje. Se aparecer dor no peito, falta de ar intensa ou desmaio, ligue 192. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "resumo_sintomas"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "resumo_persistente",
+      "title": "Caso sintoma persistente",
+      "conditions": "$periodo == 'há mais de uma semana' || $periodo == 'há mais de um mês'",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Resumo do que você relatou: sintoma $sintoma, início $periodo, intensidade $intensidade. Como o sintoma já dura algum tempo, vale marcar uma consulta. Posso simular o agendamento: diga \"quero marcar consulta\". Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "resumo_sintomas",
+      "previous_sibling": "resumo_forte"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "resumo_leve",
+      "title": "Outros casos",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Resumo do que você relatou: sintoma $sintoma, início $periodo, intensidade $intensidade. Anote quando o sintoma aparece e o que estava fazendo, e comente com seu médico. Se piorar ou surgir dor no peito ou falta de ar intensa, procure atendimento. Lembrete: sou uma simulação acadêmica e não substituo avaliação médica."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "resumo_sintomas",
+      "previous_sibling": "resumo_persistente"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_especialidade",
+      "title": "Perguntar especialidade",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Vamos simular o agendamento. Com qual especialidade? (cardiologia, clínico geral ou nutrição)"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "resumo_sintomas"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_especialidade_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_especialidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_especialidade_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@especialidade",
+      "output": {},
+      "parent": "perguntar_especialidade",
+      "context": {
+        "especialidade": "@especialidade"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_data",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_especialidade_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_especialidade_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_especialidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_especialidade_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_especialidade_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não reconheci a especialidade."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_especialidade",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_especialidade",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_especialidade_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_data",
+      "title": "Perguntar data",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Para qual dia? (por exemplo: amanhã, segunda-feira ou 20/10)"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "perguntar_especialidade"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_data_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_data",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_data_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@sys-date",
+      "output": {},
+      "parent": "perguntar_data",
+      "context": {
+        "data_consulta": "@sys-date"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_turno",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_data_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_data_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_data",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_data_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_data_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não entendi a data."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_data",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_data",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_data_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_turno",
+      "title": "Perguntar turno",
+      "conditions": "false",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Prefere manhã, tarde ou noite?"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "perguntar_data"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_turno_urgencia",
+      "title": "Urgência",
+      "conditions": "#emergencia || @sinal_alerta",
+      "output": {},
+      "parent": "perguntar_turno",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "body"
+      }
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_turno_ok",
+      "title": "Resposta reconhecida",
+      "conditions": "@turno",
+      "output": {},
+      "parent": "perguntar_turno",
+      "context": {
+        "turno": "@turno"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "resumo_agendamento",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_turno_urgencia"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_turno_outro_assunto",
+      "title": "Outro assunto",
+      "conditions": "(#cancelar || #saudacao || #sintomas || #sinais_vitais || #medicamentos || #exames || #agendamento || #prevencao || #ajuda || #despedida || #fora_de_escopo) && intents[0].confidence > 0.6",
+      "output": {},
+      "parent": "perguntar_turno",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "emergencia",
+        "selector": "condition"
+      },
+      "previous_sibling": "perguntar_turno_ok"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "perguntar_turno_repetir",
+      "title": "Resposta não reconhecida",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Não entendi o turno."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "perguntar_turno",
+      "next_step": {
+        "behavior": "jump_to",
+        "dialog_node": "perguntar_turno",
+        "selector": "body"
+      },
+      "previous_sibling": "perguntar_turno_outro_assunto"
+    },
+    {
+      "type": "standard",
+      "dialog_node": "em_outros_casos",
+      "title": "Em outros casos",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Desculpe, não entendi. Pode dizer de outro jeito?"
+              },
+              {
+                "text": "Ainda não entendi. Tente algo como \"estou com tontura\" ou \"minha pressão deu 13 por 8\"."
+              },
+              {
+                "text": "Não consegui entender. Posso ajudar a: relatar sintomas, entender valores de pressão, batimentos e saturação, tirar dúvidas gerais sobre medicamentos, explicar exames do coração, simular o agendamento de uma consulta e dar dicas de prevenção. Se for algo urgente, ligue 192."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "previous_sibling": "perguntar_turno"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "enabled": false
+    }
+  },
+  "learning_opt_out": true,
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2021-06-14"
+    }
+  },
+  "webhooks": []
+}
