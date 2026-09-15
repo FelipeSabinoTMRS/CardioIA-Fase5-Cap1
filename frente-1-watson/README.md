@@ -86,4 +86,4 @@ python scripts/testar_fluxo.py     # 10 roteiros (28 turnos): emergência, triag
 - [x] Modelagem da skill (`scripts/gerar_skill.py`) e JSON importável (`cardioia-skill.json`)
 - [x] Relatório curto do fluxo em `docs/relatorio_fluxo_conversacional.md`
 - [x] Publicado na `cardioia-skill` oficial e testado (14/09/2026): 10 roteiros, 28 turnos, todos corretos
-- [ ] Prints do builder (intents, entities e um caminho de diálogo) em `assets/evidencias/`
+- [x] Prints do builder e do Try it em [`assets/evidencias/`](../assets/evidencias/README.md)

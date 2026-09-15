@@ -103,6 +103,8 @@ Lite). A primeira rodada teve 21 de 28 turnos corretos; depois da reordenação 
 passaram**. Em seguida a `cardioia-skill` oficial (mesmo ID, ligada ao assistant do backend) foi atualizada com o
 mesmo JSON e os roteiros passaram de novo (28/28).
 
+Prints do builder e do Try it estão em [`assets/evidencias/`](../assets/evidencias/README.md) (`01` a `07`).
+
 ## 7. Limitações
 
 - Faixas de referência são gerais para adultos e servem apenas para orientar, não para diagnosticar.
