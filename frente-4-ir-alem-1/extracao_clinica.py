@@ -1,4 +1,4 @@
-﻿"""ExtraÃ§Ã£o acadÃªmica de informaÃ§Ãµes clÃ­nicas fictÃ­cias com IA generativa."""
+"""Extração acadêmica de informações clínicas fictícias com IA generativa."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 OBSERVACAO_PADRAO = (
-    "ExtraÃ§Ã£o acadÃªmica. NÃ£o substitui avaliaÃ§Ã£o mÃ©dica ou atendimento de emergÃªncia."
+    "Extração acadêmica. Não substitui avaliação médica ou atendimento de emergência."
 )
 
 
@@ -24,13 +24,13 @@ class SinaisVitais(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     pressao_arterial: str | None = Field(
-        default=None, description="PressÃ£o arterial exatamente como informada."
+        default=None, description="Pressão arterial exatamente como informada."
     )
     frequencia_cardiaca: str | None = Field(
-        default=None, description="FrequÃªncia cardÃ­aca exatamente como informada."
+        default=None, description="Frequência cardíaca exatamente como informada."
     )
     saturacao: str | None = Field(
-        default=None, description="SaturaÃ§Ã£o de oxigÃªnio exatamente como informada."
+        default=None, description="Saturação de oxigênio exatamente como informada."
     )
 
 
@@ -69,26 +69,26 @@ class ExtracaoClinica(BaseModel):
 
 
 INSTRUCAO_SISTEMA = """
-VocÃª Ã© um extrator de informaÃ§Ãµes para uma demonstraÃ§Ã£o acadÃªmica.
-Sua Ãºnica tarefa Ã© estruturar o conteÃºdo explicitamente presente no texto.
+Você é um extrator de informações para uma demonstração acadêmica.
+Sua única tarefa é estruturar o conteúdo explicitamente presente no texto.
 
-Regras obrigatÃ³rias:
-1. NÃ£o diagnostique, recomende tratamento ou avalie prognÃ³stico.
-2. NÃ£o complete lacunas e nÃ£o use conhecimento externo para inferir dados.
-3. Mantenha listas vazias e valores null quando a informaÃ§Ã£o estiver ausente.
-4. Preserve nÃºmeros e unidades dos sinais vitais como aparecem no texto.
-5. Uma informaÃ§Ã£o negada deve aparecer apenas em informacoes_negadas, nunca como
+Regras obrigatórias:
+1. Não diagnostique, recomende tratamento ou avalie prognóstico.
+2. Não complete lacunas e não use conhecimento externo para inferir dados.
+3. Mantenha listas vazias e valores null quando a informação estiver ausente.
+4. Preserve números e unidades dos sinais vitais como aparecem no texto.
+5. Uma informação negada deve aparecer apenas em informacoes_negadas, nunca como
    sintoma ou alerta afirmado.
 6. Registre em alertas somente sinais explicitamente afirmados no texto, como dor
    no peito, falta de ar intensa ou desmaio.
-7. Use fonte igual a texto_simulado e mantenha a observacao acadÃªmica definida no schema.
+7. Use fonte igual a texto_simulado e mantenha a observacao acadêmica definida no schema.
 8. Responda exclusivamente de acordo com o schema JSON fornecido.
 """.strip()
 
 
-# Schema enviado ao Gemini. Ele Ã© declarado separadamente porque alguns endpoints
-# nÃ£o aceitam `additionalProperties`, gerado pelo `extra="forbid"` do Pydantic.
-# A validaÃ§Ã£o rigorosa continua sendo feita por ExtracaoClinica apÃ³s a resposta.
+# Schema enviado ao Gemini. Ele é declarado separadamente porque alguns endpoints
+# não aceitam `additionalProperties`, gerado pelo `extra="forbid"` do Pydantic.
+# A validação rigorosa continua sendo feita por ExtracaoClinica após a resposta.
 SCHEMA_GEMINI = {
     "type": "OBJECT",
     "properties": {
@@ -130,20 +130,20 @@ SCHEMA_GEMINI = {
 
 
 def extrair_informacoes(texto: str, modelo: str) -> ExtracaoClinica:
-    """Envia o texto Ã  API e devolve apenas uma estrutura jÃ¡ validada."""
+    """Envia o texto à API e devolve apenas uma estrutura já validada."""
     if not texto.strip():
-        raise ValueError("O texto clÃ­nico nÃ£o pode estar vazio.")
+        raise ValueError("O texto clínico não pode estar vazio.")
 
     chave = os.getenv("GEMINI_API_KEY")
     if not chave:
         raise RuntimeError(
-            "GEMINI_API_KEY nÃ£o encontrada. Copie .env.example para .env e informe a chave."
+            "GEMINI_API_KEY não encontrada. Copie .env.example para .env e informe a chave."
         )
 
     cliente = genai.Client(api_key=chave)
     resposta = cliente.models.generate_content(
         model=modelo,
-        contents=f"Texto clÃ­nico fictÃ­cio para extraÃ§Ã£o:\n\n{texto.strip()}",
+        contents=f"Texto clínico fictício para extração:\n\n{texto.strip()}",
         config=types.GenerateContentConfig(
             system_instruction=INSTRUCAO_SISTEMA,
             response_mime_type="application/json",
@@ -155,12 +155,12 @@ def extrair_informacoes(texto: str, modelo: str) -> ExtracaoClinica:
     if resposta.parsed is not None:
         return ExtracaoClinica.model_validate(resposta.parsed)
     if not resposta.text:
-        raise RuntimeError("A API nÃ£o retornou conteÃºdo para validaÃ§Ã£o.")
+        raise RuntimeError("A API não retornou conteúdo para validação.")
     return ExtracaoClinica.model_validate_json(resposta.text)
 
 
 def carregar_texto(texto: str | None, arquivo: Path | None) -> str:
-    """ObtÃ©m a entrada por uma das duas formas aceitas pela linha de comando."""
+    """Obtém a entrada por uma das duas formas aceitas pela linha de comando."""
     if texto is not None:
         return texto
     if arquivo is not None:
@@ -170,10 +170,10 @@ def carregar_texto(texto: str | None, arquivo: Path | None) -> str:
 
 def criar_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Extrai informaÃ§Ãµes de um texto clÃ­nico fictÃ­cio para JSON."
+        description="Extrai informações de um texto clínico fictício para JSON."
     )
     entrada = parser.add_mutually_exclusive_group(required=True)
-    entrada.add_argument("--texto", help="Texto clÃ­nico fictÃ­cio digitado entre aspas.")
+    entrada.add_argument("--texto", help="Texto clínico fictício digitado entre aspas.")
     entrada.add_argument("--arquivo", type=Path, help="Caminho de um arquivo TXT.")
     parser.add_argument("--saida", type=Path, help="Arquivo JSON opcional para salvar.")
     return parser
