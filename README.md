@@ -132,7 +132,7 @@ Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 - [x] Backend Flask integrado à API do Watson
 - [x] Interface funcional (HTML ou React Native)
 - [ ] Repositório GitHub organizado (tornar público na hora da entrega)
-- [ ] Vídeo de até 3 minutos
+- [x] Vídeo de até 3 minutos
 - [x] Relatório curto do fluxo conversacional
 - [x] Ir Além 1: extração clínica com IA generativa + PDF
 - [ ] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
@@ -150,7 +150,7 @@ Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 
 - GitHub: <https://github.com/FelipeSabinoTMRS/CardioIA-Fase5-Cap1>
 - Interface local: <http://127.0.0.1:5050>
-- Vídeo (até 3 minutos): a gravar — roteiro em [`docs/roteiro_video.md`](docs/roteiro_video.md)
+- Vídeo (até 3 minutos): [Demonstração da interface no YouTube](https://youtu.be/Y3m6f8fgczU) — roteiro em [`docs/roteiro_video.md`](docs/roteiro_video.md)
 
 ## Observação acadêmica
 
