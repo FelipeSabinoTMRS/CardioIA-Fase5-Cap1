@@ -108,6 +108,23 @@ Abrir http://127.0.0.1:5050. Não abra o `index.html` direto no disco: o chat de
 
 Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 
+## Como executar o robô da Frente 5
+
+O robô é independente do chat: não usa credencial do Watson, só Python e o MongoDB do `docker-compose`.
+
+```bash
+cd frente-5-ir-alem-2
+python -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+docker compose up -d                 # MongoDB em 127.0.0.1:27017
+python preparar_ambiente.py          # cria o SQLite e as mensagens simuladas
+python robot.py --ciclos 3 --intervalo 10 --simular-chegada 4
+python resumo_execucoes.py           # execuções, alertas e rastreabilidade
+```
+
+Detalhes em [`frente-5-ir-alem-2/README.md`](frente-5-ir-alem-2/README.md).
+
 ## Como trabalhar neste repositório
 
 1. Uma branch por frente: `frente-1`, `frente-2`, `frente-3`, `frente-4`, `frente-5`.
@@ -137,7 +154,7 @@ Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md).
 - [x] Vídeo de até 3 minutos — [link da demonstração](https://youtu.be/Y3m6f8fgczU)
 - [x] Relatório curto do fluxo conversacional
 - [x] Ir Além 1: extração clínica com IA generativa + PDF
-- [ ] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
+- [x] Ir Além 2: RPA + bancos relacional e não relacional + relatório técnico
 
 ## Documentação adicional
 

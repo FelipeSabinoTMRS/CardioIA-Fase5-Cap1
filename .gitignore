@@ -1,6 +1,7 @@
 # Credenciais e ambiente
 .env
 .env.*
+*.env
 !.env.example
 
 # Python
@@ -25,6 +26,9 @@ build/
 
 # Bancos locais e dumps
 *.db
+*.db-wal
+*.db-shm
+*.db-journal
 *.sqlite
 *.sqlite3
 *.dump
@@ -40,3 +44,4 @@ build/
 *.log
 tmp/
 temp/
+saida/
